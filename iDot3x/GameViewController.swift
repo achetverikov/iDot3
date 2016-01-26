@@ -21,6 +21,8 @@ class GameViewController: UIViewController
         let skView = view as! SKView
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .ResizeFill
+        scene.size = skView.bounds.size
+
         skView.presentScene(scene)
     }
     
