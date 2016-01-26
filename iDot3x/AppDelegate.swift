@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  iDot3x
+//  test
 //
 //  Created by Andrey Chetverikov on 26/01/16.
 //  Copyright © 2016 Andrey Chetverikov. All rights reserved.

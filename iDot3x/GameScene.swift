@@ -1,6 +1,6 @@
 //
 //  GameScene.swift
-//  iDot3x
+//  test
 //
 //  Created by Andrey Chetverikov on 26/01/16.
 //  Copyright (c) 2016 Andrey Chetverikov. All rights reserved.
@@ -8,38 +8,83 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!"
-        myLabel.fontSize = 45
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+class GameScene: SKScene
+{
+    var objects = [SKSpriteNode]()
+    var score = 0
+    var scoreLabel = SKLabelNode(text: "Score: 0")
+    let losingNumberOfSquares = 5
+    let winningNumberOfSquares = 5
+    
+    override func didMoveToView(view: SKView)
+    {
+        backgroundColor = SKColor.whiteColor()
         
-        self.addChild(myLabel)
+        scoreLabel.position = CGPointMake(size.width*0.9, size.height*0.9)
+        scoreLabel.fontColor = UIColor.blackColor()
+        scoreLabel.fontSize = 24
+        addChild(scoreLabel)
+        
+        runAction(SKAction.repeatActionForever( SKAction.sequence([
+            SKAction.runBlock(createObject), SKAction.waitForDuration(2.0)]) ))
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
+    func createObject()
+    {
+        //let object = SKSpriteNode( color: UIColor.redColor(), size: CGSizeMake(50, 50) )
+        let object = SKSpriteNode(imageNamed: "HappyFace")
+        object.name = "square"
+        let randomXPosition = CGFloat(drand48()) * size.width
+        let randomYPosition = CGFloat(drand48()) * size.height
+        object.position = CGPointMake(randomXPosition, randomYPosition)
+        object.anchorPoint = CGPointMake(0, 0)
         
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
+        addChild(object)
+        objects.append(object)
+        
+        if objects.count > losingNumberOfSquares
+        {
+            gameOver(gameComplete: false)
         }
     }
-   
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+    
+    override func update(currentTime: CFTimeInterval)
+    {
+        if objects.count > 20
+        {
+            print( "Game Over" )
+        }
+        
+        scoreLabel.text = "Score: \(score)"
+    }
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            if let theName = self.nodeAtPoint(location).name {
+                if theName == "square" {
+                    self.removeChildrenInArray([self.nodeAtPoint(location)])
+                    //currentNumberOfShips?-=1
+                    //score+=1
+                    if ++score >= winningNumberOfSquares
+                    {
+                        gameOver(gameComplete: true)
+                    }
+                }
+            }
+//            if (gameOver?==true){
+//                initializeValues()
+//            }
+        }
+    }
+    
+    func gameOver(gameComplete gameComplete: Bool)
+    {
+        if let view = view
+        {
+            let splashScene = SplashScene(size: view.bounds.size)
+            splashScene.gameWon = gameComplete
+            view.presentScene(splashScene)
+        }
     }
 }
