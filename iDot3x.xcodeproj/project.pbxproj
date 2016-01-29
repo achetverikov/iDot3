@@ -15,6 +15,7 @@
 		3B78797E1C57978A00B8EC25 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B78797B1C57978A00B8EC25 /* GameViewController.swift */; };
 		3B7879801C5797C700B8EC25 /* SplashScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B78797F1C5797C700B8EC25 /* SplashScene.swift */; };
 		C30DB8791C5A5146003C3A73 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30DB8781C5A5146003C3A73 /* MenuViewController.swift */; };
+		C3C906BB1C5B989200DA75A1 /* Stimulus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C906BA1C5B989200DA75A1 /* Stimulus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3B78797B1C57978A00B8EC25 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3B78797F1C5797C700B8EC25 /* SplashScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScene.swift; sourceTree = "<group>"; };
 		C30DB8781C5A5146003C3A73 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = ../MenuViewController.swift; sourceTree = "<group>"; };
+		C3C906BA1C5B989200DA75A1 /* Stimulus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stimulus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		3B7879621C57948A00B8EC25 /* iDot3x */ = {
 			isa = PBXGroup;
 			children = (
+				C3C906BA1C5B989200DA75A1 /* Stimulus.swift */,
 				3B78797F1C5797C700B8EC25 /* SplashScene.swift */,
 				C30DB8781C5A5146003C3A73 /* MenuViewController.swift */,
 				3B78796B1C57948A00B8EC25 /* Main.storyboard */,
@@ -69,7 +72,6 @@
 				3B78796E1C57948A00B8EC25 /* Assets.xcassets */,
 				3B7879701C57948A00B8EC25 /* LaunchScreen.storyboard */,
 				3B7879731C57948A00B8EC25 /* Info.plist */,
-				3B7879831C57C76100B8EC25 /* Stimulus.swift */,
 			);
 			path = iDot3x;
 			sourceTree = "<group>";
@@ -148,8 +150,8 @@
 				3B78797D1C57978A00B8EC25 /* GameScene.swift in Sources */,
 				C30DB8791C5A5146003C3A73 /* MenuViewController.swift in Sources */,
 				3B7879801C5797C700B8EC25 /* SplashScene.swift in Sources */,
+				C3C906BB1C5B989200DA75A1 /* Stimulus.swift in Sources */,
 				3B78797E1C57978A00B8EC25 /* GameViewController.swift in Sources */,
-				3B7879841C57C76100B8EC25 /* Stimulus.swift in Sources */,
 				3B78797C1C57978A00B8EC25 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

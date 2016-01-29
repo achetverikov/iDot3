@@ -39,8 +39,8 @@ class GameScene: SKScene
     var numRows = 8
     var numCols = 10
     var gridIndex = 0
-    var propTarg = 1.0/3.0
-    var nStim = 80
+    var propTarg = proportion/100
+    var nStim = setsize
     
     
     let losingNumberOfSquares = 5
@@ -72,7 +72,7 @@ class GameScene: SKScene
             let col = Double(cells[i]%10)
             let row = floor(Double(cells[i])/10)
             var imgName = "SadFace"
-            if Double(i) < propTarg*Double(nStim){
+            if Double(i) < Double(propTarg)*Double(nStim){
                 imgName = "HappyFace"
             }
             let object = Stimulus(col: col, row: row, imgName: imgName, type: "target", xOffset: xOffset, yOffset: yOffset, colWidth: colWidth, rowHeight: rowHeight, randXFactor: randXFactor, randYFactor: randYFactor)
