@@ -31,6 +31,13 @@ extension MutableCollectionType where Index == Int {
     }
 }
 
+var behData: [[[String:Any]]] = []
+var stimData: [[[String:Any]]] = []
+var trialN = 0
+var touchN = 0
+var runN = 0
+var trialStartTime = 0.0
+
 class GameScene: SKScene
 {
     var objects = [SKSpriteNode]()
@@ -68,6 +75,8 @@ class GameScene: SKScene
         
         var cells = [Int](0...(numRows*numCols-1))
         cells.shuffleInPlace()
+        behData.append([])
+        stimData.append([])
         for i in 0..<nStim{
             let col = Double(cells[i]%10)
             let row = floor(Double(cells[i])/10)
@@ -89,7 +98,7 @@ class GameScene: SKScene
             default:
                 break
             }
-            print(condition)
+            //print(condition)
             
             var imgName = targets[0]
             var stType = "target1"
@@ -109,26 +118,20 @@ class GameScene: SKScene
             let object = Stimulus(col: col, row: row, imgName: imgName, stType: stType, xOffset: xOffset, yOffset: yOffset, colWidth: colWidth, rowHeight: rowHeight, randXFactor: randXFactor, randYFactor: randYFactor)
             object.name = "stimulus"
             addChild(object)
-            
+            stimData[trialN].append(["col": col, "row": row, "imgName": imgName, "stType": stType, "posX":object.posX, "posY":object.posY])
             
             //addChild(object)
-            print(object)
+            //print(object)
             //objects.append(object)
         }
-        
-        runAction(SKAction.repeatActionForever( SKAction.sequence([
-            SKAction.runBlock(createObject), SKAction.waitForDuration(2.0)]) ))
+        //runAction(SKAction.repeatActionForever( SKAction.sequence([
+        //    SKAction.runBlock(createObject), SKAction.waitForDuration(2.0)]) ))
+        trialStartTime = CACurrentMediaTime()
     }
     
     func createObject()
     {
-        //let object = SKSpriteNode( color: UIColor.redColor(), size: CGSizeMake(50, 50) )
-        
-        
-        
-        
-        
-        
+
     }
     
     override func update(currentTime: CFTimeInterval)
@@ -138,7 +141,12 @@ class GameScene: SKScene
         scoreLabel.text = "Score: \(score)"
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
+        let ts_cac = CACurrentMediaTime()
+        var timeRel = 0.0
+        if behData[trialN].count>0{
+            let prevTime =  behData[trialN][behData[trialN].count-1]["timeTS"] as? Double
+            timeRel = -(prevTime!-ts_cac)
+        }
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let localtionInView:CGPoint =  touch.locationInView(view)
@@ -148,14 +156,28 @@ class GameScene: SKScene
             if let node_name = self.nodeAtPoint(location).name {
                 if node_name == "stimulus" {
                     let stimulus = self.nodeAtPoint(location) as! Stimulus
-                    if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil) {
+                    var error = 0
+                    if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil){
+                        error=1
+                    }
+                    behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS": ts_cac, "timeRel": timeRel,"runLength":0,"touchTS":touch.timestamp, "runN":runN, "stPosX":stimulus.posX, "stPosY": stimulus.posY, "col":stimulus.col, "row": stimulus.row, "touchX": localtionInView.x, "touchY": localtionInView.y, "touchX1": location.x, "touchY2": location.y, "touchDist":0,"targDist":0,"trialResult":0, "touchN": touchN, "error": error])
                     
+                    if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil) {
+                        
                         gameOver(gameComplete: false)
                     }
                     else {
+                        score += 1
                         self.removeChildrenInArray([self.nodeAtPoint(location)])
+                        if Double(score)==propTarg*Double(nStim){
+                            gameOver(gameComplete: true)
+                        }
+                        
                     }
                 }
+            }
+            else {
+                 behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "timeTS":ts_cac, "touchTS":touch.timestamp, "touchX": localtionInView.x, "touchY": localtionInView.y, "touchX1": location.x, "touchY2": location.y, "touchDist":0,"targDist":0,"trialResult":0, "touchN": touchN])
             }
         }
     }
@@ -163,6 +185,7 @@ class GameScene: SKScene
     
     func gameOver(gameComplete gameComplete: Bool)
     {
+        print(behData)
         if let view = view
         {
             let splashScene = SplashScene(size: view.bounds.size)

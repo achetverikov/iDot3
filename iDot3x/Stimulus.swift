@@ -13,6 +13,7 @@ class Stimulus: SKSpriteNode {
     var row: Double
     var posX, posY: CGFloat
     var stType: String
+    var imgName: String
     init(col: Double, row: Double, imgName:String, stType: String, xOffset:Double, yOffset: Double, colWidth: Double, rowHeight: Double, randXFactor: Double, randYFactor: Double ) {
         let texture = SKTexture(imageNamed: imgName)
         self.col = col
@@ -21,6 +22,7 @@ class Stimulus: SKSpriteNode {
         self.posX = CGFloat(xOffset+((col+0.5)*colWidth)+(randXFactor/2)-(drand48() * randXFactor))
         self.posY = CGFloat(yOffset+((row+0.5)*rowHeight)+(randYFactor/2)-(drand48() * randYFactor))
         self.stType = stType
+        self.imgName = imgName
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(50, 50))
         
 //        print("pos: \(CGFloat(posX), \(CGFloat(posY))")
