@@ -9,7 +9,7 @@
 import UIKit
 
 var setsize = 40
-var condition = ""
+var condition = "r/g"
 var proportion = 50
 var timer = 0
 
@@ -41,20 +41,7 @@ class MenuViewController: UIViewController {
         timelabel.text = String(timestepper.value)
     }
     
-    @IBAction func ChangeLabel(sender: UISegmentedControl) {
-        if conditionselect == 0 {
-            condition = "r/g"
-        }
-        if conditionselect == 1 {
-            condition = "b/y"
-        }
-        if conditionselect == 2 {
-            condition = "rs/gt"
-        }
-        if conditionselect == 3 {
-            condition = "rt/gs"
-        }
-    }
+
     @IBAction func changedsize(sender: AnyObject) {
         updateLabels()
     }
@@ -74,6 +61,20 @@ class MenuViewController: UIViewController {
         timer = Int (timestepper.value)
     }
     
+    @IBAction func savecondition(sender: AnyObject) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            condition = "r/g"
+        case 1:
+            condition = "b/y"
+        case 2:
+            condition = "rs/gt"
+        case 3:
+            condition = "rt/gs"
+        default:
+            break;
+        }  //Switch
+    }
 
     
 }
