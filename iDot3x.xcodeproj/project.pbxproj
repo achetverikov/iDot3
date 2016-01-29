@@ -69,6 +69,7 @@
 				3B78796E1C57948A00B8EC25 /* Assets.xcassets */,
 				3B7879701C57948A00B8EC25 /* LaunchScreen.storyboard */,
 				3B7879731C57948A00B8EC25 /* Info.plist */,
+				3B7879831C57C76100B8EC25 /* Stimulus.swift */,
 			);
 			path = iDot3x;
 			sourceTree = "<group>";
@@ -148,6 +149,7 @@
 				C30DB8791C5A5146003C3A73 /* MenuViewController.swift in Sources */,
 				3B7879801C5797C700B8EC25 /* SplashScene.swift in Sources */,
 				3B78797E1C57978A00B8EC25 /* GameViewController.swift in Sources */,
+				3B7879841C57C76100B8EC25 /* Stimulus.swift in Sources */,
 				3B78797C1C57978A00B8EC25 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,7 +212,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -249,7 +251,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
