@@ -39,8 +39,8 @@ class GameScene: SKScene
     var numRows = 8
     var numCols = 10
     var gridIndex = 0
-    var propTarg = 0.1
-    var nStim = 80
+    var propTarg = Double(proportion)/100
+    var nStim = setsize
     
     
     let losingNumberOfSquares = 5
@@ -71,7 +71,6 @@ class GameScene: SKScene
         for i in 0..<nStim{
             let col = Double(cells[i]%10)
             let row = floor(Double(cells[i])/10)
-            let condition = "b/y"
             var targets = [String]()
             var distractors = [String]()
             switch condition {
@@ -90,6 +89,7 @@ class GameScene: SKScene
             default:
                 break
             }
+            print(condition)
             
             var imgName = targets[0]
             var stType = "target1"

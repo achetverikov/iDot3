@@ -92,6 +92,7 @@
                                 </segments>
                                 <connections>
                                     <action selector="ChangeLabel:" destination="YXB-xu-8Gg" eventType="valueChanged" id="svX-su-1JV"/>
+                                    <action selector="savecondition:" destination="YXB-xu-8Gg" eventType="valueChanged" id="VCe-v2-IbB"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
