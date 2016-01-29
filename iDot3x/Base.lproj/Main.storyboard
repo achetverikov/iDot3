@@ -54,12 +54,14 @@
                                 <rect key="frame" x="282" y="176" width="94" height="29"/>
                                 <connections>
                                     <action selector="changedporp:" destination="YXB-xu-8Gg" eventType="valueChanged" id="WFd-M8-xW8"/>
+                                    <action selector="saveprop:" destination="YXB-xu-8Gg" eventType="valueChanged" id="a3h-Rz-gAl"/>
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="60" stepValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="4Vp-xg-F7g">
                                 <rect key="frame" x="282" y="225" width="94" height="29"/>
                                 <connections>
                                     <action selector="changedtime:" destination="YXB-xu-8Gg" eventType="valueChanged" id="kNu-bh-wgS"/>
+                                    <action selector="savetimer:" destination="YXB-xu-8Gg" eventType="valueChanged" id="X2T-9l-LXn"/>
                                 </connections>
                             </stepper>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Set size" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lnB-HR-zMC">
