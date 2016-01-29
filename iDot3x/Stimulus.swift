@@ -12,15 +12,15 @@ class Stimulus: SKSpriteNode {
     var col: Double
     var row: Double
     var posX, posY: CGFloat
-    var type: String
-    init(col: Double, row: Double, imgName:String, type: String, xOffset:Double, yOffset: Double, colWidth: Double, rowHeight: Double, randXFactor: Double, randYFactor: Double ) {
+    var stType: String
+    init(col: Double, row: Double, imgName:String, stType: String, xOffset:Double, yOffset: Double, colWidth: Double, rowHeight: Double, randXFactor: Double, randYFactor: Double ) {
         let texture = SKTexture(imageNamed: imgName)
         self.col = col
         self.row = row
 
         self.posX = CGFloat(xOffset+((col+0.5)*colWidth)+(randXFactor/2)-(drand48() * randXFactor))
         self.posY = CGFloat(yOffset+((row+0.5)*rowHeight)+(randYFactor/2)-(drand48() * randYFactor))
-        self.type = type
+        self.stType = stType
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(50, 50))
         
 //        print("pos: \(CGFloat(posX), \(CGFloat(posY))")
@@ -34,7 +34,7 @@ class Stimulus: SKSpriteNode {
     }
     
     override var description: String {
-        return "type:\(type) square:(\(col),\(row)), pos:(\(posX),\(posY))"
+        return "type:\(stType) square:(\(col),\(row)), pos:(\(posX),\(posY))"
     }
 
 

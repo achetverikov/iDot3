@@ -39,7 +39,7 @@ class GameScene: SKScene
     var numRows = 8
     var numCols = 10
     var gridIndex = 0
-    var propTarg = 1.0/3.0
+    var propTarg = 0.1
     var nStim = 80
     
     
@@ -50,7 +50,7 @@ class GameScene: SKScene
     
     override func didMoveToView(view: SKView)
     {
-
+        
         backgroundColor = SKColor.whiteColor()
         
         scoreLabel.position = CGPointMake(size.width*0.9, size.height*0.9)
@@ -71,14 +71,45 @@ class GameScene: SKScene
         for i in 0..<nStim{
             let col = Double(cells[i]%10)
             let row = floor(Double(cells[i])/10)
-            var imgName = "SadFace"
-            if Double(i) < propTarg*Double(nStim){
-                imgName = "HappyFace"
+            let condition = "b/y"
+            var targets = [String]()
+            var distractors = [String]()
+            switch condition {
+            case "r/g":
+                targets = ["redDot","greenDot"]
+                distractors = ["blueDot", "yellowDot"]
+            case "b/y":
+                distractors = ["redDot","greenDot"]
+                targets = ["blueDot", "yellowDot"]
+            case "rs/gt":
+                distractors = ["redTriangle","greenSquare"]
+                targets = ["redSquare", "greenTriangle"]
+            case "rt/gs":
+                targets = ["redTriangle","greenSquare"]
+                distractors = ["redSquare", "greenTriangle"]
+            default:
+                break
             }
-            let object = Stimulus(col: col, row: row, imgName: imgName, type: "target", xOffset: xOffset, yOffset: yOffset, colWidth: colWidth, rowHeight: rowHeight, randXFactor: randXFactor, randYFactor: randYFactor)
-            object.name = "square"
+            
+            var imgName = targets[0]
+            var stType = "target1"
+            
+            if Double(i) >= propTarg*Double(nStim){
+                imgName = distractors[0]
+                stType = "distractor1"
+                if Double(i) >= (propTarg+(1-propTarg)/2)*Double(nStim){
+                    imgName = distractors[1]
+                    stType = "distractor2"
+                }
+            }
+            else if Double(i) >= propTarg/2*Double(nStim){
+                imgName = targets[1]
+                stType = "target2"
+            }
+            let object = Stimulus(col: col, row: row, imgName: imgName, stType: stType, xOffset: xOffset, yOffset: yOffset, colWidth: colWidth, rowHeight: rowHeight, randXFactor: randXFactor, randYFactor: randYFactor)
+            object.name = "stimulus"
             addChild(object)
-
+            
             
             //addChild(object)
             print(object)
@@ -107,30 +138,28 @@ class GameScene: SKScene
         scoreLabel.text = "Score: \(score)"
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    
+        
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let localtionInView:CGPoint =  touch.locationInView(view)
-
+            
             print(localtionInView)
-
-            if let theName = self.nodeAtPoint(location).name {
-                print(self.nodeAtPoint(location))
-                if theName == "square" {
-                    self.removeChildrenInArray([self.nodeAtPoint(location)])
-                    //currentNumberOfShips?-=1
-                    //score+=1
-                    if ++score >= winningNumberOfSquares
-                    {
-                    //    gameOver(gameComplete: true)
+            
+            if let node_name = self.nodeAtPoint(location).name {
+                if node_name == "stimulus" {
+                    let stimulus = self.nodeAtPoint(location) as! Stimulus
+                    if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil) {
+                    
+                        gameOver(gameComplete: false)
+                    }
+                    else {
+                        self.removeChildrenInArray([self.nodeAtPoint(location)])
                     }
                 }
             }
-//            if (gameOver?==true){
-//                initializeValues()
-//            }
         }
     }
+    
     
     func gameOver(gameComplete gameComplete: Bool)
     {
