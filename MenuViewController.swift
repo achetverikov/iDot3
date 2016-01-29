@@ -8,10 +8,12 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+var setsize = 40
+var condition = ""
+var proportion = 50
+var timer = 0
 
-    var condition = 1
-    var setsize = 40
+class MenuViewController: UIViewController {
     
     @IBOutlet weak var sizelabel: UILabel!
     @IBOutlet weak var sizestepper: UIStepper!
@@ -41,16 +43,16 @@ class MenuViewController: UIViewController {
     
     @IBAction func ChangeLabel(sender: UISegmentedControl) {
         if conditionselect == 0 {
-            condition = 1
+            condition = "r/g"
         }
         if conditionselect == 1 {
-            condition = 2
+            condition = "b/y"
         }
         if conditionselect == 2 {
-            condition = 3
+            condition = "rs/gt"
         }
         if conditionselect == 3 {
-            condition = 4
+            condition = "rt/gs"
         }
     }
     @IBAction func changedsize(sender: AnyObject) {
@@ -65,4 +67,13 @@ class MenuViewController: UIViewController {
     @IBAction func savesettings(sender: AnyObject) {
         setsize = Int (sizestepper.value)
     }
+    @IBAction func saveprop(sender: AnyObject) {
+        proportion = Int (porpstepper.value)
+    }
+    @IBAction func savetimer(sender: AnyObject) {
+        timer = Int (timestepper.value)
+    }
+    
+
+    
 }
