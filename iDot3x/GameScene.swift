@@ -144,6 +144,7 @@ class GameScene: SKScene
             let localtionInView:CGPoint =  touch.locationInView(view)
             
             print(localtionInView)
+            print(participant)
             
             if let node_name = self.nodeAtPoint(location).name {
                 if node_name == "stimulus" {
@@ -152,8 +153,13 @@ class GameScene: SKScene
                     
                         gameOver(gameComplete: false)
                     }
+                  
                     else {
+                        score += 1
                         self.removeChildrenInArray([self.nodeAtPoint(location)])
+                        if score == setsize*(proportion/100) {
+                            gameOver(gameComplete: true)
+                            }
                     }
                 }
             }
