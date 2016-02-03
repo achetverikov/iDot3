@@ -23,10 +23,18 @@ class SplashScene: SKScene
         addChild(label)
     }
     
-    var gameWon : Bool = false {
+    var gameWon : Int = 0 {
         didSet {
-            label.text = ( gameWon ? "Game Won!" : "Game Over!" )
-        }
+            if gameWon==0{
+                label.text = "Game Over!"
+            }
+            else if gameWon==1{
+                label.text = "Game Won!"
+            }
+            else if gameWon==2{
+                label.text = "Game Completed!"
+            }
+               }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
