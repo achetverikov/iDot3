@@ -11,7 +11,7 @@ import UIKit
 var setsize = 40
 var condition = "r/g"
 var proportion = 50
-var timer = 0
+var timer = 0.0
 
 class MenuViewController: UIViewController {
     
@@ -58,7 +58,7 @@ class MenuViewController: UIViewController {
         proportion = Int (porpstepper.value)
     }
     @IBAction func savetimer(sender: AnyObject) {
-        timer = Int (timestepper.value)
+        timer = Double (timestepper.value)
     }
     
     @IBAction func savecondition(sender: AnyObject) {

@@ -141,10 +141,13 @@ class GameScene: SKScene
     
     override func update(currentTime: CFTimeInterval)
     {
-        
-        scoreLabel.text = "Score: \(score)"
+        var currentTime2=currentTime - trialStartTime
+        scoreLabel.text = "Score: \(score) Time: \(currentTime2)"
+        if timer>0 && currentTime2 >= timer{
+            gameOver(gameComplete: 2)
+        }
     }
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let ts_cac = (CACurrentMediaTime()-trialStartTime)*1000
         var timeRel = 0.0
         var touchDist = 0.0
@@ -177,17 +180,17 @@ class GameScene: SKScene
                             runLength = 1
                         }
                     }
-                    behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS": ts_cac, "timeRel": timeRel,"runLength": runLength, "touchTS":touchTS,  "runN":runN, "stPosX":stimulus.posX, "stPosY": stimulus.posY, "col":stimulus.col, "row": stimulus.row,"touchX": location.x, "touchY": location.y, "touchDist": touchDist, "targDist": targDist, "touchN": touchN, "error": error])
+                    behData[trialN].append(["participantN": participant, "age": age, "gender": gender, "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS": ts_cac, "timeRel": timeRel,"runLength": runLength, "touchTS":touchTS,  "runN":runN, "stPosX":stimulus.posX, "stPosY": stimulus.posY, "col":stimulus.col, "row": stimulus.row,"touchX": location.x, "touchY": location.y, "touchDist": touchDist, "targDist": targDist, "touchN": touchN, "error": error])
                     
                     if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil) {
                         
-                        gameOver(gameComplete: false)
+                        gameOver(gameComplete: 0)
                     }
                     else {
                         score += 1
                         self.removeChildrenInArray([self.nodeAtPoint(location)])
                         if Double(score)==propTarg*Double(nStim){
-                            gameOver(gameComplete: true)
+                            gameOver(gameComplete: 1)
                         }
                         
                     }
@@ -199,7 +202,7 @@ class GameScene: SKScene
                 }
             }
             else {
-                behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":"", "imgName":"", "timeTS": ts_cac, "timeRel": timeRel, "runLength":"", "touchTS": touchTS, "runN":"", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX": location.x, "touchY": location.y, "touchDist":touchDist , "targDist":"", "touchN": touchN, "error": 0])
+                behData[trialN].append(["participantN": participant, "age": age, "gender": gender, "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":"", "imgName":"", "timeTS": ts_cac, "timeRel": timeRel, "runLength":"", "touchTS": touchTS, "runN":"", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX": location.x, "touchY": location.y, "touchDist":touchDist , "targDist":"", "touchN": touchN, "error": 0])
                 
                 prevTouch = touch
                 prevTime = ts_cac
@@ -210,7 +213,7 @@ class GameScene: SKScene
     func saveData(){
         
         var contents = ""
-        let headers = ["participantN", "trialN", "condition", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength","touchTS", "runN", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
+        let headers = ["participantN","age","gender", "trialN", "condition", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength","touchTS", "runN", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
         
         if trialN == 0{
             contents += headers.joinWithSeparator(",")+"\n"
@@ -249,7 +252,7 @@ class GameScene: SKScene
         }
     }
     
-    func gameOver(gameComplete gameComplete: Bool)
+    func gameOver(gameComplete gameComplete: Int)
     {
         //print(behData)
         saveData()
