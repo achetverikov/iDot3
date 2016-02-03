@@ -186,13 +186,13 @@ class GameScene: SKScene
                         
                         gameOver(gameComplete: 0)
                     }
+                  
                     else {
                         score += 1
                         self.removeChildrenInArray([self.nodeAtPoint(location)])
                         if Double(score)==propTarg*Double(nStim){
                             gameOver(gameComplete: 1)
                         }
-                        
                     }
                     
                     prevTouch=touch

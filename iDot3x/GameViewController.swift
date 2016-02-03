@@ -25,6 +25,7 @@ class GameViewController: UIViewController
 
         skView.presentScene(scene)
     }
+    @IBOutlet weak var settingsButton: UIButton!
     
     override func prefersStatusBarHidden() -> Bool
     {
