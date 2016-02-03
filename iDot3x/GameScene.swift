@@ -34,9 +34,14 @@ extension MutableCollectionType where Index == Int {
 var behData: [[[String:Any]]] = []
 var stimData: [[[String:Any]]] = []
 var trialN = 0
-var touchN = 0
-var runN = 0
+
+
 var trialStartTime = 0.0
+var date_identifier = ""
+let currentDate = NSDate()
+var prevTouch: UITouch?
+var prevStim: Stimulus?
+var prevTime: Double?
 
 class GameScene: SKScene
 {
@@ -48,15 +53,20 @@ class GameScene: SKScene
     var gridIndex = 0
     var propTarg = Double(proportion)/100
     var nStim = setsize
-    
-    
+    var dateFormatter = NSDateFormatter()
     let losingNumberOfSquares = 5
     let winningNumberOfSquares = 5
     
-    
+    var runN = 1
+    var runLength = 1
+    var touchN = 0
     
     override func didMoveToView(view: SKView)
     {
+
+        
+        dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
+        date_identifier = dateFormatter.stringFromDate(currentDate)
         
         backgroundColor = SKColor.whiteColor()
         
@@ -129,29 +139,26 @@ class GameScene: SKScene
         trialStartTime = CACurrentMediaTime()
     }
     
-    func createObject()
-    {
-
-    }
-    
     override func update(currentTime: CFTimeInterval)
     {
-        
         
         scoreLabel.text = "Score: \(score)"
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let ts_cac = CACurrentMediaTime()
+        let ts_cac = (CACurrentMediaTime()-trialStartTime)*1000
         var timeRel = 0.0
-        if behData[trialN].count>0{
-            let prevTime =  behData[trialN][behData[trialN].count-1]["timeTS"] as? Double
-            timeRel = -(prevTime!-ts_cac)
-        }
-        for touch: AnyObject in touches {
+        var touchDist = 0.0
+        var targDist = 0.0
+        for touch: UITouch in touches {
             let location = touch.locationInNode(self)
-            let localtionInView:CGPoint =  touch.locationInView(view)
             
-            print(localtionInView)
+            if behData[trialN].count>0{
+                timeRel = -(Double(prevTime!)-ts_cac)
+                touchDist = sqrt(pow(Double(prevTouch!.locationInNode(self).x-location.x), 2)+pow(Double(prevTouch!.locationInNode(self).y-location.y), 2))
+            }
+            let touchTS = String(format: "%.2f", (touch.timestamp - trialStartTime)*1000)
+            //print(localtionInView)
+            touchN = touchN+1
             
             if let node_name = self.nodeAtPoint(location).name {
                 if node_name == "stimulus" {
@@ -160,7 +167,17 @@ class GameScene: SKScene
                     if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil){
                         error=1
                     }
-                    behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS": ts_cac, "timeRel": timeRel,"runLength":0,"touchTS":touch.timestamp, "runN":runN, "stPosX":stimulus.posX, "stPosY": stimulus.posY, "col":stimulus.col, "row": stimulus.row, "touchX": localtionInView.x, "touchY": localtionInView.y, "touchX1": location.x, "touchY2": location.y, "touchDist":0,"targDist":0,"trialResult":0, "touchN": touchN, "error": error])
+                    if let ps = prevStim{
+                        targDist = sqrt(pow(Double(ps.posX-stimulus.posX), 2)+pow(Double(ps.posY-stimulus.posY), 2))
+                        if ps.imgName==stimulus.imgName{
+                            runLength+=1
+                        }
+                        else {
+                            runN+=1
+                            runLength = 1
+                        }
+                    }
+                    behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS": ts_cac, "timeRel": timeRel,"runLength": runLength, "touchTS":touchTS,  "runN":runN, "stPosX":stimulus.posX, "stPosY": stimulus.posY, "col":stimulus.col, "row": stimulus.row,"touchX": location.x, "touchY": location.y, "touchDist": touchDist, "targDist": targDist, "touchN": touchN, "error": error])
                     
                     if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil) {
                         
@@ -174,18 +191,76 @@ class GameScene: SKScene
                         }
                         
                     }
+                    
+                    prevTouch=touch
+                    prevStim=stimulus
+                    prevTime=ts_cac
+                    
                 }
             }
             else {
-                 behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "timeTS":ts_cac, "touchTS":touch.timestamp, "touchX": localtionInView.x, "touchY": localtionInView.y, "touchX1": location.x, "touchY2": location.y, "touchDist":0,"targDist":0,"trialResult":0, "touchN": touchN])
+                behData[trialN].append(["participantN":"", "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":"", "imgName":"", "timeTS": ts_cac, "timeRel": timeRel, "runLength":"", "touchTS": touchTS, "runN":"", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX": location.x, "touchY": location.y, "touchDist":touchDist , "targDist":"", "touchN": touchN, "error": 0])
+                
+                prevTouch = touch
+                prevTime = ts_cac
             }
         }
     }
     
+    func saveData(){
+        
+        var contents = ""
+        let headers = ["participantN", "trialN", "condition", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength","touchTS", "runN", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
+        
+        if trialN == 0{
+            contents += headers.joinWithSeparator(",")+"\n"
+        }
+        for i in behData[trialN]{
+            for k in headers{
+                if let val = i[k]{
+                    contents+="\""+String(val)+"\""+","
+                } else {
+                    contents+="\"\""+","
+                }
+            }
+            contents += "\n"
+        }
+        
+        let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        let path = documents.URLByAppendingPathComponent("iDot3/\(date_identifier).csv").path!
+        print("\(path)")
+        
+        if !NSFileManager.defaultManager().fileExistsAtPath(documents.URLByAppendingPathComponent("iDot3").path!) {
+            
+            do {
+                try NSFileManager.defaultManager().createDirectoryAtPath(documents.URLByAppendingPathComponent("iDot3").path!, withIntermediateDirectories: false, attributes: nil)
+            } catch let error as NSError {
+                print(error.localizedDescription);
+            }
+        }
+        
+        if let outputStream = NSOutputStream(toFileAtPath: path, append: true) {
+            outputStream.open()
+            outputStream.write(contents)
+            
+            outputStream.close()
+        } else {
+            print("Unable to open file")
+        }
+    }
     
     func gameOver(gameComplete gameComplete: Bool)
     {
-        print(behData)
+        //print(behData)
+        saveData()
+        trialN+=1
+        runN = 1
+        runLength = 1
+        touchN = 0
+        prevStim = nil
+        prevTime = nil
+        prevTouch = nil
+        
         if let view = view
         {
             let splashScene = SplashScene(size: view.bounds.size)
