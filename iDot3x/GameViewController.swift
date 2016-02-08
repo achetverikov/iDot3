@@ -11,6 +11,7 @@ import SpriteKit
 
 class GameViewController: UIViewController
 {
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -22,9 +23,9 @@ class GameViewController: UIViewController
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .ResizeFill
         scene.size = skView.bounds.size
-
         skView.presentScene(scene)
     }
+
     @IBOutlet weak var settingsButton: UIButton!
     
     override func prefersStatusBarHidden() -> Bool

@@ -23,7 +23,7 @@ class Stimulus: SKSpriteNode {
         self.posY = CGFloat(yOffset+((row+0.5)*rowHeight)+(randYFactor/2)-(drand48() * randYFactor))
         self.stType = stType
         self.imgName = imgName
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(50, 50))
+        super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(30, 30))
         
 //        print("pos: \(CGFloat(posX), \(CGFloat(posY))")
         self.position = CGPointMake(posX, posY)

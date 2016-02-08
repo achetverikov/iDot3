@@ -15,9 +15,12 @@ var timer = 0.0
 var participant = ""
 var age = 0
 var gender:String? = ""
+var FeatConj = 0
 
 class MenuViewController: UIViewController {
     
+
+    @IBOutlet var newgamelabel: UIButton!
     @IBOutlet weak var agelabel: UITextField!
     @IBOutlet weak var genderlabel: UITextField!
     @IBOutlet weak var Participantlabel: UITextField!
@@ -81,17 +84,30 @@ class MenuViewController: UIViewController {
     @IBAction func saveparticipant(sender: AnyObject) {
         participant = String (Participantlabel.text!)
     }
+    @IBAction func cleardata(sender: AnyObject) {
+        behData = []
+        stimData = []
+        trialN = 0
+        trialCompleted = 0
+        score = 0
+        dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
+        date_identifier = dateFormatter.stringFromDate(currentDate)
+    }
     
     @IBAction func savecondition(sender: AnyObject) {
         switch sender.selectedSegmentIndex {
         case 0:
             condition = "r/g"
+            FeatConj = 0
         case 1:
             condition = "b/y"
+            FeatConj = 0
         case 2:
-            condition = "rs/gt"
+            condition = "rs/gd"
+            FeatConj = 1
         case 3:
-            condition = "rt/gs"
+            condition = "rd/gs"
+            FeatConj = 1
         default:
             break;
         }  //Switch

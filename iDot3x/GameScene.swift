@@ -31,29 +31,33 @@ extension MutableCollectionType where Index == Int {
     }
 }
 
-var behData: [[[String:Any]]] = []
-var stimData: [[[String:Any]]] = []
+var runTest = 0
+var behData: [[[String:String]]] = []
+var stimData: [[[String:String]]] = []
 var trialN = 0
-
-
+var trialCompleted = 0
+var currentTime2: CFTimeInterval = 0.0
+var score = 0
 var trialStartTime = 0.0
 var date_identifier = ""
 let currentDate = NSDate()
 var prevTouch: UITouch?
 var prevStim: Stimulus?
 var prevTime: Double?
+var dateFormatter = NSDateFormatter()
+var dist_threshold  = 20.0
 
 class GameScene: SKScene
 {
+    
     var objects = [SKSpriteNode]()
-    var score = 0
     var scoreLabel = SKLabelNode(text: "Score: 0")
+    var trialLabel = SKLabelNode(text: "Trial: 5")
     var numRows = 8
     var numCols = 10
     var gridIndex = 0
     var propTarg = Double(proportion)/100
     var nStim = setsize
-    var dateFormatter = NSDateFormatter()
     let losingNumberOfSquares = 5
     let winningNumberOfSquares = 5
     
@@ -63,17 +67,24 @@ class GameScene: SKScene
     
     override func didMoveToView(view: SKView)
     {
-
         
         dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
-        date_identifier = dateFormatter.stringFromDate(currentDate)
+        if date_identifier=="" {
+            date_identifier = dateFormatter.stringFromDate(currentDate)
+        }
         
-        backgroundColor = SKColor.whiteColor()
+        backgroundColor = SKColor.blackColor()
         
         scoreLabel.position = CGPointMake(size.width*0.9, size.height*0.9)
-        scoreLabel.fontColor = UIColor.blackColor()
+        scoreLabel.fontColor = UIColor.blueColor()
         scoreLabel.fontSize = 24
-        addChild(scoreLabel)
+        //addChild(scoreLabel)
+        
+        trialLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
+        trialLabel.position = CGPointMake(size.width*0.055, size.height*0.035)
+        trialLabel.fontColor = UIColor(red: 0.6, green: 0.0, blue: 1, alpha: 1)
+        trialLabel.fontSize = 22
+        addChild(trialLabel)
         
         let colWidth = Double(size.width)/Double(numCols+2)
         let rowHeight = Double(size.height)/Double(numRows+2)
@@ -99,12 +110,12 @@ class GameScene: SKScene
             case "b/y":
                 distractors = ["redDot","greenDot"]
                 targets = ["blueDot", "yellowDot"]
-            case "rs/gt":
-                distractors = ["redTriangle","greenSquare"]
-                targets = ["redSquare", "greenTriangle"]
-            case "rt/gs":
-                targets = ["redTriangle","greenSquare"]
-                distractors = ["redSquare", "greenTriangle"]
+            case "rs/gd":
+                distractors = ["redDot","greenSquare"]
+                targets = ["redSquare", "greenDot"]
+            case "rd/gs":
+                targets = ["redDot","greenSquare"]
+                distractors = ["redSquare", "greenDot"]
             default:
                 break
             }
@@ -128,7 +139,7 @@ class GameScene: SKScene
             let object = Stimulus(col: col, row: row, imgName: imgName, stType: stType, xOffset: xOffset, yOffset: yOffset, colWidth: colWidth, rowHeight: rowHeight, randXFactor: randXFactor, randYFactor: randYFactor)
             object.name = "stimulus"
             addChild(object)
-            stimData[trialN].append(["col": col, "row": row, "imgName": imgName, "stType": stType, "posX":object.posX, "posY":object.posY])
+            stimData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "col": "\(col)", "row":"\(row)", "imgName": imgName, "stType": stType, "posX":"\(object.posX)", "posY":"\(object.posY)"])
             
             //addChild(object)
             //print(object)
@@ -141,11 +152,23 @@ class GameScene: SKScene
     
     override func update(currentTime: CFTimeInterval)
     {
-        var currentTime2=currentTime - trialStartTime
+        currentTime2=currentTime - trialStartTime
+        trialLabel.text = "Trial: \(trialCompleted)"
         scoreLabel.text = "Score: \(score) Time: \(currentTime2)"
-        if timer>0 && currentTime2 >= timer{
-            gameOver(gameComplete: 2)
+        if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            //print(topController.isKindOfClass(GameViewController))
+            if timer>0 && currentTime2 >= timer && topController.isKindOfClass(GameViewController){
+                timerforlabel = currentTime2
+                gameOver(gameComplete: 2)
+                
+            }
+            // topController should now be your topmost view controller
         }
+        
+        
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let ts_cac = (CACurrentMediaTime()-trialStartTime)*1000
@@ -162,47 +185,67 @@ class GameScene: SKScene
             let touchTS = String(format: "%.2f", (touch.timestamp - trialStartTime)*1000)
             //print(localtionInView)
             touchN = touchN+1
-            
-            if let node_name = self.nodeAtPoint(location).name {
-                if node_name == "stimulus" {
-                    let stimulus = self.nodeAtPoint(location) as! Stimulus
-                    var error = 0
-                    if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil){
-                        error=1
-                    }
-                    if let ps = prevStim{
-                        targDist = sqrt(pow(Double(ps.posX-stimulus.posX), 2)+pow(Double(ps.posY-stimulus.posY), 2))
-                        if ps.imgName==stimulus.imgName{
-                            runLength+=1
+            runTest = 0
+            var node: SKNode?
+            var prevDist = 9900000.0
+            for curNode in self.children{
+                if let node_name = curNode.name {
+                    if node_name=="stimulus"{
+                        let dist = Double(hypotf(Float(location.x-curNode.position.x), Float(location.y-curNode.position.y)))
+                        if  dist<dist_threshold{
+                            node = curNode
+                            
                         }
-                        else {
-                            runN+=1
-                            runLength = 1
+                        if dist<prevDist{
+                            prevDist = dist
                         }
                     }
-                    behData[trialN].append(["participantN": participant, "age": age, "gender": gender, "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS": ts_cac, "timeRel": timeRel,"runLength": runLength, "touchTS":touchTS,  "runN":runN, "stPosX":stimulus.posX, "stPosY": stimulus.posY, "col":stimulus.col, "row": stimulus.row,"touchX": location.x, "touchY": location.y, "touchDist": touchDist, "targDist": targDist, "touchN": touchN, "error": error])
-                    
-                    if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil) {
-                        
-                        gameOver(gameComplete: 0)
-                    }
-                  
-                    else {
-                        score += 1
-                        self.removeChildrenInArray([self.nodeAtPoint(location)])
-                        if Double(score)==propTarg*Double(nStim){
-                            gameOver(gameComplete: 1)
-                        }
-                    }
-                    
-                    prevTouch=touch
-                    prevStim=stimulus
-                    prevTime=ts_cac
-                    
                 }
             }
+            if let node = node {
+                let stimulus = node as! Stimulus
+                var error = 0
+                if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil){
+                    error=1
+                }
+                if let ps = prevStim{
+                    targDist = sqrt(pow(Double(ps.posX-stimulus.posX), 2)+pow(Double(ps.posY-stimulus.posY), 2))
+                    if ps.imgName==stimulus.imgName{
+                        runLength+=1
+                    }
+                    else {
+                        runN+=1
+                        behData[trialN][behData[trialN].count-1]["runTest"] = "\(runLength)"
+                        runLength = 1
+                    }
+                }
+                behData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS":"\(ts_cac)", "timeRel":"\(timeRel)","runLength":"\(runLength)", "runTest": "\(runTest)", "touchTS":"\(touchTS)", "runN": "\(runN)", "stPosX":"\(stimulus.posX)", "stPosY":"\(stimulus.posY)", "col":"\(stimulus.col)", "row":"\(stimulus.row)","touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist": "\(targDist)", "touchN":"\(touchN)", "error":"\(error)"])
+                
+                
+                prevTouch=touch
+                prevStim=stimulus
+                prevTime=ts_cac
+                
+                if (stimulus.stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil) {
+                    timerforlabel = Double (currentTime2)
+                    gameOver(gameComplete: 0)
+                }
+                    
+                else {
+                    score += 1
+                    timerforlabel = Double (currentTime2)
+                    self.removeChildrenInArray([node])
+                    if Double(score)==propTarg*Double(nStim){
+                        
+                        gameOver(gameComplete: 1)
+                    }
+                }
+                
+                
+            }
+                
             else {
-                behData[trialN].append(["participantN": participant, "age": age, "gender": gender, "trialN":trialN, "condition":condition, "setSize":setsize, "proportion":proportion, "timelimit":0, "stType":"", "imgName":"", "timeTS": ts_cac, "timeRel": timeRel, "runLength":"", "touchTS": touchTS, "runN":"", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX": location.x, "touchY": location.y, "touchDist":touchDist , "targDist":"", "touchN": touchN, "error": 0])
+                behData[trialN].append(["participantN": participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition, "FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":"", "imgName":"", "timeTS": "\(ts_cac)", "timeRel":"\(timeRel)", "runLength":"", "runTest":"\(runTest)", "touchTS":"\(touchTS)", "runN":"", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist":"", "touchN":"\(touchN)", "error":"0"])
                 
                 prevTouch = touch
                 prevTime = ts_cac
@@ -213,7 +256,7 @@ class GameScene: SKScene
     func saveData(){
         
         var contents = ""
-        let headers = ["participantN","age","gender", "trialN", "condition", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength","touchTS", "runN", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
+        var headers = ["participantN","age","gender", "trialN", "condition", "FeatConj", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength", "runTest", "touchTS", "runN", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
         
         if trialN == 0{
             contents += headers.joinWithSeparator(",")+"\n"
@@ -230,7 +273,44 @@ class GameScene: SKScene
         }
         
         let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-        let path = documents.URLByAppendingPathComponent("iDot3/\(date_identifier).csv").path!
+        var path = documents.URLByAppendingPathComponent("iDot3/\(date_identifier).csv").path!
+        print("\(path)")
+        
+        if !NSFileManager.defaultManager().fileExistsAtPath(documents.URLByAppendingPathComponent("iDot3").path!) {
+            
+            do {
+                try NSFileManager.defaultManager().createDirectoryAtPath(documents.URLByAppendingPathComponent("iDot3").path!, withIntermediateDirectories: false, attributes: nil)
+            } catch let error as NSError {
+                print(error.localizedDescription);
+            }
+        }
+        
+        if let outputStream = NSOutputStream(toFileAtPath: path, append: true) {
+            outputStream.open()
+            outputStream.write(contents)
+            
+            outputStream.close()
+        } else {
+            print("Unable to open file")
+        }
+        contents = ""
+        headers = ["participantN","age","gender", "trialN", "condition", "FeatConj", "setSize", "proportion", "timelimit", "col", "row", "imgName", "stType", "posX", "posY"]
+        
+        if trialN == 0{
+            contents += headers.joinWithSeparator(",")+"\n"
+        }
+        for i in stimData[trialN]{
+            for k in headers{
+                if let val = i[k]{
+                    contents+="\""+String(val)+"\""+","
+                } else {
+                    contents+="\"\""+","
+                }
+            }
+            contents += "\n"
+        }
+        
+        path = documents.URLByAppendingPathComponent("iDot3/\(date_identifier)_stim.csv").path!
         print("\(path)")
         
         if !NSFileManager.defaultManager().fileExistsAtPath(documents.URLByAppendingPathComponent("iDot3").path!) {
@@ -255,6 +335,9 @@ class GameScene: SKScene
     func gameOver(gameComplete gameComplete: Int)
     {
         //print(behData)
+        if behData[trialN].count>=1 {
+            behData[trialN][behData[trialN].count-1]["runTest"] = "\(runLength)"
+        }
         saveData()
         trialN+=1
         runN = 1

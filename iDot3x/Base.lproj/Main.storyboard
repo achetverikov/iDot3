@@ -23,31 +23,31 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uFZ-J2-fWO">
-                                <rect key="frame" x="623" y="211" width="75" height="21"/>
+                                <rect key="frame" x="562" y="242" width="75" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
+                                <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dx1-dh-6ky">
-                                <rect key="frame" x="623" y="247" width="75" height="21"/>
+                                <rect key="frame" x="562" y="293" width="75" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pat-uX-O7m">
-                                <rect key="frame" x="623" y="285" width="75" height="21"/>
+                                <rect key="frame" x="562" y="346" width="75" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stepper opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minimumValue="4" maximumValue="80" stepValue="4" id="e43-A2-hJf">
-                                <rect key="frame" x="521" y="207" width="94" height="29"/>
+                                <rect key="frame" x="465" y="238" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <connections>
@@ -56,7 +56,7 @@
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minimumValue="25" maximumValue="75" stepValue="25" id="ebG-hH-aZp">
-                                <rect key="frame" x="521" y="244" width="94" height="29"/>
+                                <rect key="frame" x="465" y="290" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <connections>
@@ -65,7 +65,7 @@
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="60" stepValue="5" id="4Vp-xg-F7g">
-                                <rect key="frame" x="521" y="281" width="94" height="29"/>
+                                <rect key="frame" x="465" y="343" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <connections>
@@ -74,7 +74,7 @@
                                 </connections>
                             </stepper>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Set size" textAlignment="natural" minimumFontSize="17" id="lnB-HR-zMC">
-                                <rect key="frame" x="422" y="206" width="97" height="30"/>
+                                <rect key="frame" x="365" y="237" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -82,7 +82,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Proportion" textAlignment="natural" minimumFontSize="17" id="zwX-5J-ug5">
-                                <rect key="frame" x="402" y="243" width="122" height="30"/>
+                                <rect key="frame" x="345" y="289" width="122" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -90,7 +90,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Time limit" textAlignment="natural" minimumFontSize="17" id="Hz7-Eg-6mc">
-                                <rect key="frame" x="408" y="281" width="111" height="30"/>
+                                <rect key="frame" x="351" y="342" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -98,30 +98,21 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="ToQ-1X-HO0">
-                                <rect key="frame" x="378" y="335" width="269" height="29"/>
+                                <rect key="frame" x="378" y="427" width="269" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <segments>
                                     <segment title="R/G"/>
                                     <segment title="B/Y"/>
-                                    <segment title="RS/GT"/>
-                                    <segment title="RT/GS"/>
+                                    <segment title="RS/GD"/>
+                                    <segment title="RD/GS"/>
                                 </segments>
                                 <connections>
-
                                     <action selector="savecondition:" destination="YXB-xu-8Gg" eventType="valueChanged" id="vcj-oq-Ebr"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NEZ-Z5-HX4">
-                                <rect key="frame" x="387" y="95" width="132" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
-                                <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4T1-xF-Xd4">
-                                <rect key="frame" x="422" y="132" width="94" height="29"/>
+                                <rect key="frame" x="373" y="156" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
@@ -129,7 +120,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PoT-2v-cjN">
-                                <rect key="frame" x="462" y="169" width="57" height="29"/>
+                                <rect key="frame" x="410" y="196" width="57" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
@@ -137,7 +128,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="natural" minimumFontSize="17" id="T6e-8Y-kXq">
-                                <rect key="frame" x="521" y="168" width="66" height="30"/>
+                                <rect key="frame" x="465" y="196" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -147,7 +138,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="natural" minimumFontSize="17" id="4Gd-UB-kKi">
-                                <rect key="frame" x="521" y="131" width="139" height="30"/>
+                                <rect key="frame" x="465" y="155" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -157,7 +148,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="natural" minimumFontSize="17" id="M7i-cG-APh">
-                                <rect key="frame" x="521" y="95" width="139" height="30"/>
+                                <rect key="frame" x="465" y="111" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -166,9 +157,29 @@
                                     <action selector="saveparticipant:" destination="YXB-xu-8Gg" eventType="editingDidEnd" id="7uJ-zx-dgN"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NEZ-Z5-HX4">
+                                <rect key="frame" x="330" y="111" width="132" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
+                                <color key="textColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bcR-oC-3nH">
+                                <rect key="frame" x="20" y="684" width="107" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cleardata:" destination="YXB-xu-8Gg" eventType="touchUpInside" id="ns6-Bm-Qvh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.81176470590000005" green="0.96862745100000003" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
@@ -176,6 +187,7 @@
                         <outlet property="agelabel" destination="T6e-8Y-kXq" id="fG3-yI-lux"/>
                         <outlet property="conditionselect" destination="ToQ-1X-HO0" id="HgV-O0-Hdm"/>
                         <outlet property="genderlabel" destination="4Gd-UB-kKi" id="sta-NL-fSa"/>
+                        <outlet property="newgamelabel" destination="bcR-oC-3nH" id="tVU-Yk-vtO"/>
                         <outlet property="porplabel" destination="dx1-dh-6ky" id="NMu-ye-6dp"/>
                         <outlet property="porpstepper" destination="ebG-hH-aZp" id="iVs-Lo-JJt"/>
                         <outlet property="sizelabel" destination="uFZ-J2-fWO" id="ude-4A-VZv"/>
@@ -200,7 +212,9 @@
                                 <rect key="frame" x="944" y="718" width="60" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
-                                <state key="normal" title="Settings"/>
+                                <state key="normal" title="Settings">
+                                    <color key="titleColor" red="0.5430750846862793" green="0.32395470142364502" blue="0.98856085538864136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="YXB-xu-8Gg" kind="modal" id="s6f-r6-I2D"/>
                                 </connections>
@@ -220,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="426.24000000000001" y="803.84000000000003"/>
+            <point key="canvasLocation" x="426" y="803"/>
         </scene>
     </scenes>
     <resources>
