@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+//extension sem gerir okkur mögulegt að randomiza hvar hver litur lendir í gridinu
+
 extension CollectionType {
     /// Return a copy of `self` with its elements shuffled
     func shuffle() -> [Generator.Element] {
@@ -17,6 +19,7 @@ extension CollectionType {
     }
 }
 
+//Annað extension sem
 extension MutableCollectionType where Index == Int {
     /// Shuffle the elements of `self` in-place.
     mutating func shuffleInPlace() {
@@ -30,7 +33,7 @@ extension MutableCollectionType where Index == Int {
         }
     }
 }
-
+//Global breytur sem við þurfum að halda fyrir utan class
 var runTest = 0
 var behData: [[[String:String]]] = []
 var stimData: [[[String:String]]] = []
@@ -40,16 +43,16 @@ var currentTime2: CFTimeInterval = 0.0
 var score = 0
 var trialStartTime = 0.0
 var date_identifier = ""
-let currentDate = NSDate()
+var currentDate = NSDate()
 var prevTouch: UITouch?
 var prevStim: Stimulus?
 var prevTime: Double?
 var dateFormatter = NSDateFormatter()
 var dist_threshold  = 20.0
-
+var write_headers=true
 class GameScene: SKScene
 {
-    
+    //Breytur sem við notum bara inn í gamescene-inu
     var objects = [SKSpriteNode]()
     var scoreLabel = SKLabelNode(text: "Score: 0")
     var trialLabel = SKLabelNode(text: "Trial: 5")
@@ -67,19 +70,21 @@ class GameScene: SKScene
     
     override func didMoveToView(view: SKView)
     {
-        
+        //þegar leikskjárinn kemur fram tékkar hún á klukkunni, við gerum þetta þegar við hefjum nýjan leik, en ef þetta er fyrsti leikurinn þá notar hún dagsetninguna og klukkuna til að búa til nýtt gagnaskjal
         dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
         if date_identifier=="" {
             date_identifier = dateFormatter.stringFromDate(currentDate)
         }
-        
+        //Litur á bakgrunninum
         backgroundColor = SKColor.blackColor()
         
+        //label upp í hægra horni sem við notuðum á meðan á forritun stóð, add child er commentað út og þessvegna kemur hann ekki á skjáinn
         scoreLabel.position = CGPointMake(size.width*0.9, size.height*0.9)
         scoreLabel.fontColor = UIColor.blueColor()
         scoreLabel.fontSize = 24
         //addChild(scoreLabel)
         
+        //Label í vinstra horni sem sýnir þátttakenda hvað hann er búinn með mörg trials
         trialLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
         trialLabel.position = CGPointMake(size.width*0.055, size.height*0.035)
         trialLabel.fontColor = UIColor(red: 0.6, green: 0.0, blue: 1, alpha: 1)
@@ -219,7 +224,7 @@ class GameScene: SKScene
                         runLength = 1
                     }
                 }
-                behData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS":"\(ts_cac)", "timeRel":"\(timeRel)","runLength":"\(runLength)", "runTest": "\(runTest)", "touchTS":"\(touchTS)", "runN": "\(runN)", "stPosX":"\(stimulus.posX)", "stPosY":"\(stimulus.posY)", "col":"\(stimulus.col)", "row":"\(stimulus.row)","touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist": "\(targDist)", "touchN":"\(touchN)", "error":"\(error)"])
+                behData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS":"\(ts_cac)", "timeRel":"\(timeRel)","runLength":"\(runLength)", "runTest": "\(runTest)", "touchTS":"\(touchTS)", "runN": "\(runN)", "runNH": "0", "stPosX":"\(stimulus.posX)", "stPosY":"\(stimulus.posY)", "col":"\(stimulus.col)", "row":"\(stimulus.row)","touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist": "\(targDist)", "touchN":"\(touchN)", "error":"\(error)"])
                 
                 
                 prevTouch=touch
@@ -236,7 +241,6 @@ class GameScene: SKScene
                     timerforlabel = Double (currentTime2)
                     self.removeChildrenInArray([node])
                     if Double(score)==propTarg*Double(nStim){
-                        
                         gameOver(gameComplete: 1)
                     }
                 }
@@ -245,7 +249,7 @@ class GameScene: SKScene
             }
                 
             else {
-                behData[trialN].append(["participantN": participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition, "FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":"", "imgName":"", "timeTS": "\(ts_cac)", "timeRel":"\(timeRel)", "runLength":"", "runTest":"\(runTest)", "touchTS":"\(touchTS)", "runN":"", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist":"", "touchN":"\(touchN)", "error":"0"])
+                behData[trialN].append(["participantN": participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition, "FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":"", "imgName":"", "timeTS": "\(ts_cac)", "timeRel":"\(timeRel)", "runLength":"", "runTest":"\(runTest)", "touchTS":"\(touchTS)", "runN":"", "runNH": "0", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist":"", "touchN":"\(touchN)", "error":"0"])
                 
                 prevTouch = touch
                 prevTime = ts_cac
@@ -256,9 +260,9 @@ class GameScene: SKScene
     func saveData(){
         
         var contents = ""
-        var headers = ["participantN","age","gender", "trialN", "condition", "FeatConj", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength", "runTest", "touchTS", "runN", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
+        var headers = ["participantN","age","gender", "trialN", "condition", "FeatConj", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength", "runTest", "touchTS", "runN", "runNH", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
         
-        if trialN == 0{
+        if trialN == 0 && write_headers{
             contents += headers.joinWithSeparator(",")+"\n"
         }
         for i in behData[trialN]{
@@ -273,7 +277,7 @@ class GameScene: SKScene
         }
         
         let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-        var path = documents.URLByAppendingPathComponent("iDot3/\(date_identifier).csv").path!
+        var path = documents.URLByAppendingPathComponent("\(date_identifier).csv").path!
         print("\(path)")
         
         if !NSFileManager.defaultManager().fileExistsAtPath(documents.URLByAppendingPathComponent("iDot3").path!) {
@@ -296,8 +300,9 @@ class GameScene: SKScene
         contents = ""
         headers = ["participantN","age","gender", "trialN", "condition", "FeatConj", "setSize", "proportion", "timelimit", "col", "row", "imgName", "stType", "posX", "posY"]
         
-        if trialN == 0{
+        if trialN == 0 && write_headers{
             contents += headers.joinWithSeparator(",")+"\n"
+            write_headers = false
         }
         for i in stimData[trialN]{
             for k in headers{
@@ -310,7 +315,7 @@ class GameScene: SKScene
             contents += "\n"
         }
         
-        path = documents.URLByAppendingPathComponent("iDot3/\(date_identifier)_stim.csv").path!
+        path = documents.URLByAppendingPathComponent("\(date_identifier)_stim.csv").path!
         print("\(path)")
         
         if !NSFileManager.defaultManager().fileExistsAtPath(documents.URLByAppendingPathComponent("iDot3").path!) {
@@ -337,6 +342,7 @@ class GameScene: SKScene
         //print(behData)
         if behData[trialN].count>=1 {
             behData[trialN][behData[trialN].count-1]["runTest"] = "\(runLength)"
+            behData[trialN][behData[trialN].count-1]["runNH"] = "\(runN)"
         }
         saveData()
         trialN+=1

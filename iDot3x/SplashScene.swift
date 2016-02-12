@@ -9,10 +9,12 @@
 
 import SpriteKit
 
+// búum til þessa breytu til þess að geta tekið tímann fyrir töfina á því að endurræsa leikinn eftir hverja umferð
 var timerforlabel = 0.0
 
 class SplashScene: SKScene
 {
+    //Skilgreinum breyturnar sem í þessu tilviki eru textaboxin og feedback myndirnar
     var splashStartTime = 0.0
     var label = SKLabelNode(text: "Tap to Play")
     var label2 = SKLabelNode (text: "")
@@ -22,13 +24,15 @@ class SplashScene: SKScene
     var win = SKSpriteNode (imageNamed:"HappyFace")
     var lose = SKSpriteNode (imageNamed:"SadFace")
     
+    //Hérna köllum við splashscreeninn fram
     override func didMoveToView(view: SKView)
     {
+        //litur á bakgrunni
         backgroundColor = SKColor.whiteColor()
-        
+        //staðsetning á myndunum
         win.position = CGPointMake(size.width*0.5, size.height*0.8)
         lose.position = CGPointMake(size.width*0.5, size.height*0.8)
-        
+        //staðsetning, litur, stærð og köllum fram textaboxin, hvert fyrir sig
         label.position = CGPointMake(size.width*0.5, size.height*0.5)
         label.fontColor = UIColor.blackColor()
         label.fontSize = 42
@@ -53,9 +57,10 @@ class SplashScene: SKScene
         label5.fontColor = UIColor.blueColor()
         label5.fontSize = 42
         addChild(label5)
+        //Hér skráum við niður hvað "klukkan" er þegar splashscreenið byrjar, skráum það í breytuna sem við bjuggum til efst
         splashStartTime = CACurrentMediaTime()
     }
-    
+    //Hér skilgreinum við þrjú mismunandi viðbrögð eftir því hvernig leikurinn endaði (kláraði, villa, tíminn kláraðist).
     var gameWon : Int = 0 {
         didSet {
             if gameWon==0{
@@ -84,13 +89,14 @@ class SplashScene: SKScene
             }
                }
     }
-    
+    //Hér látum við leikinn byrja eftur ef ýtt er á skjáinn
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: UITouch in touches {
             print(touch.timestamp)
             
         if let view = view
         {
+            //það að ýta á skjáinn virkar bara eftir að minnsta kosti einni sekúndu eftir að skjárinn kom fram 
             if CACurrentMediaTime() >= splashStartTime + 1 {
             let gameScene = GameScene(size: view.bounds.size)
                 view.presentScene(gameScene)

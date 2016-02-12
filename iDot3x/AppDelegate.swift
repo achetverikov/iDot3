@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//Grunndót um hvernig forritið hagar sér þegar það er kallað fram, þegar slökkt er á því o.s.fr.
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

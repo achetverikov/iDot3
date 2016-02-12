@@ -19,10 +19,12 @@ class Stimulus: SKSpriteNode {
         self.col = col
         self.row = row
 
+        //Hérna búm við til jitterinn þannig að áreitin birtist ekki í beinum línum
         self.posX = CGFloat(xOffset+((col+0.5)*colWidth)+(randXFactor/2)-(drand48() * randXFactor))
         self.posY = CGFloat(yOffset+((row+0.5)*rowHeight)+(randYFactor/2)-(drand48() * randYFactor))
         self.stType = stType
         self.imgName = imgName
+        //Hér stejum við inn stærðina á áreitinu
         super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(30, 30))
         
 //        print("pos: \(CGFloat(posX), \(CGFloat(posY))")
