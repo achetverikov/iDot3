@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-//extension sem gerir okkur mögulegt að randomiza hvar hver litur lendir í gridinu
+//extension which enables us to randomize where each stimuli ends up in the grid
 
 extension CollectionType {
     /// Return a copy of `self` with its elements shuffled
@@ -19,7 +19,7 @@ extension CollectionType {
     }
 }
 
-//Annað extension sem
+//another extension for randomizing the grid
 extension MutableCollectionType where Index == Int {
     /// Shuffle the elements of `self` in-place.
     mutating func shuffleInPlace() {
@@ -33,7 +33,7 @@ extension MutableCollectionType where Index == Int {
         }
     }
 }
-//Global breytur sem við þurfum að halda fyrir utan class
+//Global variables that we need outside the classes
 var runTest = 0
 var behData: [[[String:String]]] = []
 var stimData: [[[String:String]]] = []
@@ -54,7 +54,7 @@ var new_game_starting = 0
 
 class GameScene: SKScene
 {
-    //Breytur sem við notum bara inn í gamescene-inu
+    //Variables only needed withing the game scene
     var objects = [SKSpriteNode]()
     var scoreLabel = SKLabelNode(text: "Score: 0")
     var trialLabel = SKLabelNode(text: "Trial: 5")
@@ -70,6 +70,8 @@ class GameScene: SKScene
     var runLength = 1
     var touchN = 0
     
+    
+    //Here we define what is presented on the screen
     override func didMoveToView(view: SKView)
     {
         if new_game_starting == 1 {
@@ -80,21 +82,21 @@ class GameScene: SKScene
         score = 0
         new_game_starting = 0
         }
-        //þegar leikskjárinn kemur fram tékkar hún á klukkunni, við gerum þetta þegar við hefjum nýjan leik, en ef þetta er fyrsti leikurinn þá notar hún dagsetninguna og klukkuna til að búa til nýtt gagnaskjal
+        //when the gamescene starts, it checks the time, we do this when we start a new game, if it is the first round, then it uses this time and date for the name on the datafile
         dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
         if date_identifier=="" {
             date_identifier = dateFormatter.stringFromDate(currentDate)
         }
-        //Litur á bakgrunninum
+        //Color of the backgroud
         backgroundColor = SKColor.blackColor()
         
-        //label upp í hægra horni sem við notuðum á meðan á forritun stóð, add child er commentað út og þessvegna kemur hann ekki á skjáinn
+        //label in the top right corner that we used while programming (with score and time), add child is commented out so that it doesn´t appear on the screen anymore
         scoreLabel.position = CGPointMake(size.width*0.9, size.height*0.9)
         scoreLabel.fontColor = UIColor.blueColor()
         scoreLabel.fontSize = 24
         //addChild(scoreLabel)
         
-        //Label í vinstra horni sem sýnir þátttakenda hvað hann er búinn með mörg trials
+        //Label in the bottom left that shows participants how many trials they have completed
         trialLabel = SKLabelNode(fontNamed: "Helvetica-Bold")
         trialLabel.position = CGPointMake(size.width*0.055, size.height*0.035)
         trialLabel.fontColor = UIColor(red: 0.6, green: 0.0, blue: 1, alpha: 1)
