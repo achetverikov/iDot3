@@ -11,7 +11,7 @@ import SpriteKit
 
 class GameViewController: UIViewController
 {
-    
+    // This function creates the scene and presents it
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class GameViewController: UIViewController
 
     @IBOutlet weak var settingsButton: UIButton!
     
+    // When setting button is clicked, dismiss the view controller (the scene will be dismissed as well)
     @IBAction func done(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
