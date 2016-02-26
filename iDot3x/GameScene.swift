@@ -50,6 +50,8 @@ var prevTime: Double?
 var dateFormatter = NSDateFormatter()
 var dist_threshold  = 20.0
 var write_headers=true
+var new_game_starting = 0
+
 class GameScene: SKScene
 {
     //Breytur sem við notum bara inn í gamescene-inu
@@ -70,6 +72,14 @@ class GameScene: SKScene
     
     override func didMoveToView(view: SKView)
     {
+        if new_game_starting == 1 {
+        behData = []
+        stimData = []
+        trialN = 0
+        trialCompleted = 0
+        score = 0
+        new_game_starting = 0
+        }
         //þegar leikskjárinn kemur fram tékkar hún á klukkunni, við gerum þetta þegar við hefjum nýjan leik, en ef þetta er fyrsti leikurinn þá notar hún dagsetninguna og klukkuna til að búa til nýtt gagnaskjal
         dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
         if date_identifier=="" {

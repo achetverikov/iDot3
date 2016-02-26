@@ -73,52 +73,51 @@ class MenuViewController: UIViewController {
         trialN = 0
         trialCompleted = 0
         score = 0
+        new_game_starting = 0
     }
 
   //hér breytum við gildunum á breytunum sem við skilgreindum efst þegar ýtt er á takka
     @IBAction func saveage(sender: AnyObject) {
         age = Int (agelabel.text!)!
-        clearbetween()
+        new_game_starting = 1
     }
     @IBAction func savegender(sender: AnyObject) {
         gender = String (genderlabel.text!)
-        clearbetween()
+        new_game_starting = 1
     }
     @IBAction func changedsize(sender: AnyObject) {
         updateLabels()
-        clearbetween()
     }
     @IBAction func changedporp(sender: AnyObject) {
         updateLabels()
-        clearbetween()
     }
     @IBAction func changedtime(sender: AnyObject) {
         updateLabels()
-        clearbetween()
+        new_game_starting = 1
     }
     @IBAction func savesettings(sender: AnyObject) {
         setsize = Int (sizestepper.value)
-        clearbetween()
+        new_game_starting = 1
     }
     @IBAction func saveprop(sender: AnyObject) {
         proportion = Int (porpstepper.value)
-        clearbetween()
+        new_game_starting = 1
     }
     @IBAction func savetimer(sender: AnyObject) {
         timer = Double (timestepper.value)
-        clearbetween()
+        new_game_starting = 1
     }
     @IBAction func saveparticipant(sender: AnyObject) {
         participant = String (Participantlabel.text!)
-        clearbetween()
+        new_game_starting = 1
     }
     //látum cleardata takkann hreinsa allar breytur þegar nýr þátttakandi kemur
     @IBAction func cleardata(sender: AnyObject) {
-        behData = []
-        stimData = []
-        trialN = 0
-        trialCompleted = 0
-        score = 0
+        clearbetween()
+        participant = ""
+        age = 0
+        gender = ""
+        updateLabels()
         currentDate = NSDate()
         dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
         date_identifier = dateFormatter.stringFromDate(currentDate)
@@ -146,7 +145,9 @@ class MenuViewController: UIViewController {
             startcondition = 3
         default:
             break;
-        }  //Switch
+        }
+        new_game_starting = 1
+        //Switch
     }
 
     

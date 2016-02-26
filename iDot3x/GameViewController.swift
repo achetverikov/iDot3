@@ -28,6 +28,10 @@ class GameViewController: UIViewController
 
     @IBOutlet weak var settingsButton: UIButton!
     
+    @IBAction func done(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     override func prefersStatusBarHidden() -> Bool
     {
         return true
