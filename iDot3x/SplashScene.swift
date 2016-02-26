@@ -9,12 +9,12 @@
 
 import SpriteKit
 
-// búum til þessa breytu til þess að geta tekið tímann fyrir töfina á því að endurræsa leikinn eftir hverja umferð
+// we create this variable so that we can measure the time that we then use for the delay on the activation of the next trial
 var timerforlabel = 0.0
 
 class SplashScene: SKScene
 {
-    //Skilgreinum breyturnar sem í þessu tilviki eru textaboxin og feedback myndirnar
+    //defining variables which are the textboxes and the feedback images
     var splashStartTime = 0.0
     var label = SKLabelNode(text: "Tap to Play")
     var label2 = SKLabelNode (text: "")
@@ -24,15 +24,15 @@ class SplashScene: SKScene
     var win = SKSpriteNode (imageNamed:"HappyFace")
     var lose = SKSpriteNode (imageNamed:"SadFace")
     
-    //Hérna köllum við splashscreeninn fram
+    //calling the splash screen
     override func didMoveToView(view: SKView)
     {
-        //litur á bakgrunni
+        //color of the background
         backgroundColor = SKColor.whiteColor()
-        //staðsetning á myndunum
+        //location of the images
         win.position = CGPointMake(size.width*0.5, size.height*0.8)
         lose.position = CGPointMake(size.width*0.5, size.height*0.8)
-        //staðsetning, litur, stærð og köllum fram textaboxin, hvert fyrir sig
+        //location, color, size and presenting each text box
         label.position = CGPointMake(size.width*0.5, size.height*0.5)
         label.fontColor = UIColor.blackColor()
         label.fontSize = 42
@@ -57,10 +57,10 @@ class SplashScene: SKScene
         label5.fontColor = UIColor.blueColor()
         label5.fontSize = 42
         addChild(label5)
-        //Hér skráum við niður hvað "klukkan" er þegar splashscreenið byrjar, skráum það í breytuna sem við bjuggum til efst
+        //Here we record the current time when the splash screen appears into the variable we created at the top
         splashStartTime = CACurrentMediaTime()
     }
-    //Hér skilgreinum við þrjú mismunandi viðbrögð eftir því hvernig leikurinn endaði (kláraði, villa, tíminn kláraðist).
+    //Here we define the three different game ending condition (won (found all targets), lost (tapped an distractor), comppleted (time ran out))
     var gameWon : Int = 0 {
         didSet {
             if gameWon==0{
@@ -89,14 +89,14 @@ class SplashScene: SKScene
             }
                }
     }
-    //Hér látum við leikinn byrja eftur ef ýtt er á skjáinn
+    //Restarting the game/start the next trial by clicking the screen
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: UITouch in touches {
             print(touch.timestamp)
             
         if let view = view
         {
-            //það að ýta á skjáinn virkar bara eftir að minnsta kosti einni sekúndu eftir að skjárinn kom fram 
+            //delay on the screen tapping, so that you cannot tap the screen for one second after the splash screen appears, this is to reduce the likelyhood of accidentally starting a new trial
             if CACurrentMediaTime() >= splashStartTime + 1 {
             let gameScene = GameScene(size: view.bounds.size)
                 view.presentScene(gameScene)
