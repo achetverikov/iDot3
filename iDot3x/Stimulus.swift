@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+
 class Stimulus: SKSpriteNode {
     var col: Double
     var row: Double
