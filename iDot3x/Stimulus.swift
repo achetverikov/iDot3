@@ -8,11 +8,7 @@
 
 import SpriteKit
 
-// This is a class for stimulus based on SKSpriteNode
-// parameters: col, row - column, row in grid
-// posX, posY - position, pixels
-// stType - target or distractor (can be different types, like target1 or target2)
-// imgName - filename
+
 class Stimulus: SKSpriteNode {
     var col: Double
     var row: Double
