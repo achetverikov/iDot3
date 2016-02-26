@@ -8,7 +8,7 @@
 
 import UIKit
 
-//Stillum upphafsgildi parametra og breyta sem við notum
+//Setting the default values of the parameters and variables that we use
 var setsize = 40
 var condition = "r/g"
 var proportion = 50
@@ -21,7 +21,7 @@ var startcondition = 0
 
 class MenuViewController: UIViewController {
 
-    //tengjum takkana og textaboxin og gefum þeim nöfn
+    //connecting the buttons and textboxes and naming them
     @IBOutlet var newgamelabel: UIButton!
     @IBOutlet weak var agelabel: UITextField!
     @IBOutlet weak var genderlabel: UITextField!
@@ -34,10 +34,10 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var timestepper: UIStepper!
     @IBOutlet weak var conditionselect: UISegmentedControl!
     
-    //hérna köllum við þetta fram á skjáinn
+    //calling the settings screen to the screen
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Hér setjum við gildi inn í textaboxin, fyrst eru það default gildin hér að ofan en síðan eru það stillingarnar sem við gerum og þau haldast á milli umferða. Í seinni hlutanum (.value) þá erum við að breyta gildunum sem takkarnir hafa þannig að þeir byrji með sömu gildi og voru í síðustu umferð
+        //Here we put values into the text boxes, first they are the default values but they should then become the values that we give them by tapping the steppers. The .value lines we are chaning the starting value of the steppers so that their value starts as we last set them (they do not reset to default values between rounds)
         sizelabel.text = String (setsize)
         porplabel.text = String (proportion)
         timelabel.text = String (timer)
@@ -56,7 +56,7 @@ class MenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    // function sem uppfærir öll textabox þegar við ýtum á takkana
+    // function that updates the labels
     func updateLabels() {
         sizelabel.text = String(sizestepper.value)
         porplabel.text = String(porpstepper.value)
@@ -67,6 +67,7 @@ class MenuViewController: UIViewController {
         agelabel.text = String (age)
         genderlabel.text = gender
     }
+    //function that clears the data between rounds
     func clearbetween() {
         behData = []
         stimData = []
@@ -76,7 +77,7 @@ class MenuViewController: UIViewController {
         new_game_starting = 0
     }
 
-  //hér breytum við gildunum á breytunum sem við skilgreindum efst þegar ýtt er á takka
+  //here we change the values of the global variables as we push the steppers
     @IBAction func saveage(sender: AnyObject) {
         age = Int (agelabel.text!)!
         new_game_starting = 1
@@ -111,7 +112,7 @@ class MenuViewController: UIViewController {
         participant = String (Participantlabel.text!)
         new_game_starting = 1
     }
-    //látum cleardata takkann hreinsa allar breytur þegar nýr þátttakandi kemur
+    //here we let the new game button clear all variables for a new participant
     @IBAction func cleardata(sender: AnyObject) {
         clearbetween()
         participant = ""
@@ -124,7 +125,7 @@ class MenuViewController: UIViewController {
         write_headers = true
         
     }
-    //þetta á heima ofar, erum bara að vista conditionið sem er valið
+    //This changes the value of the global condition variable in addition to defining if it is a feature or conjunction search
     @IBAction func savecondition(sender: AnyObject) {
         switch sender.selectedSegmentIndex {
         case 0:
