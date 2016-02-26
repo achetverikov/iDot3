@@ -25,14 +25,14 @@ class GameViewController: UIViewController
         scene.size = skView.bounds.size
         skView.presentScene(scene)
     }
-
+    //connects the settings button
     @IBOutlet weak var settingsButton: UIButton!
     
     // When setting button is clicked, dismiss the view controller (the scene will be dismissed as well)
     @IBAction func done(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
-    
+    //hides the statusbar of the ipad
     override func prefersStatusBarHidden() -> Bool
     {
         return true
