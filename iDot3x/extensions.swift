@@ -5,6 +5,8 @@
 
 import Foundation
 
+// We use this extension to write data to file
+
 extension NSOutputStream {
     
     /// Write String to outputStream
