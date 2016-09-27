@@ -85,7 +85,6 @@ class SplashScene: SKScene
                 addChild(win)
                 score = 0
                 trialCompleted += 1
-                print (trialCompleted.value)
             }
                }
     }
