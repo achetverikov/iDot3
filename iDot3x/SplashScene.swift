@@ -95,11 +95,14 @@ class SplashScene: SKScene
             
         if let view = view
         {
+        if trialCompleted < settrial {
             //delay on the screen tapping, so that you cannot tap the screen for one second after the splash screen appears, this is to reduce the likelyhood of accidentally starting a new trial
             if CACurrentMediaTime() >= splashStartTime + 1 {
-            let gameScene = GameScene(size: view.bounds.size)
+              
+                let gameScene = GameScene(size: view.bounds.size)
                 view.presentScene(gameScene)
             }
+        }
         }
         }
     }

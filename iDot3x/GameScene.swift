@@ -49,9 +49,10 @@ var prevTouch: UITouch? // previousTouch used for calculating distances, etc.
 var prevStim: Stimulus? // previous Stimulus info, again for distances etc.
 var prevTime: Double? // previous touch time
 var dateFormatter = NSDateFormatter() // for formatting the dates
-var dist_threshold  = 20.0 // threshold for touch counting
+var dist_threshold  = 22.0 // threshold for touch counting
 var write_headers=true // should we add headers to file? we do that on the first trial
 var new_game_starting = 0 // if new game is starting we reset stuff
+var switches = 2
 
 class GameScene: SKScene
 {
@@ -172,7 +173,7 @@ class GameScene: SKScene
             addChild(object)
             
             //save all info to stimData
-            stimData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "col": "\(col)", "row":"\(row)", "imgName": imgName, "stType": stType, "posX":"\(object.posX)", "posY":"\(object.posY)"])
+            stimData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "task":"\(task)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "col": "\(col)", "row":"\(row)", "imgName": imgName, "stType": stType, "posX":"\(object.posX)", "posY":"\(object.posY)"])
             
             
         }
@@ -260,16 +261,18 @@ class GameScene: SKScene
                     //increase runlength if the stimulus is the same as one before or add runTest var
                     if ps.imgName==stimulus.imgName{
                         runLength+=1
+                        switches = 0
                     }
                     else {
                         runN+=1
                         behData[trialN][behData[trialN].count-1]["runTest"] = "\(runLength)"
                         runLength = 1
+                        switches = 1
                     }
                 }
                 
                 //save everything
-                behData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS":"\(ts_cac)", "timeRel":"\(timeRel)","runLength":"\(runLength)", "runTest": "\(runTest)", "touchTS":"\(touchTS)", "runN": "\(runN)", "runNH": "0", "stPosX":"\(stimulus.posX)", "stPosY":"\(stimulus.posY)", "col":"\(stimulus.col)", "row":"\(stimulus.row)","touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist": "\(targDist)", "touchN":"\(touchN)", "error":"\(error)"])
+                behData[trialN].append(["participantN":participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "task":"\(task)", "condition":condition,"FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":stimulus.stType, "imgName":stimulus.imgName, "timeTS":"\(ts_cac)", "timeRel":"\(timeRel)","runLength":"\(runLength)", "runTest": "\(runTest)", "touchTS":"\(touchTS)", "runN": "\(runN)", "runNH": "0", "stPosX":"\(stimulus.posX)", "stPosY":"\(stimulus.posY)", "col":"\(stimulus.col)", "row":"\(stimulus.row)","touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist": "\(targDist)", "touchN":"\(touchN)", "error":"\(error)", "switches":"\(switches)"])
                 
                 
                 prevTouch=touch
@@ -298,7 +301,7 @@ class GameScene: SKScene
             }
             else {
                 // behData saved even when the touch is not on a stimuli
-                behData[trialN].append(["participantN": participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "condition":condition, "FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":"", "imgName":"", "timeTS": "\(ts_cac)", "timeRel":"\(timeRel)", "runLength":"", "runTest":"\(runTest)", "touchTS":"\(touchTS)", "runN":"", "runNH": "0", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist":"", "touchN":"\(touchN)", "error":"0"])
+                behData[trialN].append(["participantN": participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "task":"\(task)","condition":condition, "FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":"", "imgName":"", "timeTS": "\(ts_cac)", "timeRel":"\(timeRel)", "runLength":"", "runTest":"\(runTest)", "touchTS":"\(touchTS)", "runN":"", "runNH": "0", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist":"", "touchN":"\(touchN)", "error":"0", "switches":"\(switches)"])
                 
                 prevTouch = touch
                 prevTime = ts_cac
@@ -312,7 +315,7 @@ class GameScene: SKScene
         var contents = ""
         
         // headers - every field we use should be here
-        var headers = ["participantN","age","gender", "trialN", "condition", "FeatConj", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength", "runTest", "touchTS", "runN", "runNH", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error"]
+        var headers = ["participantN","age","gender", "trialN", "task", "condition", "FeatConj", "setSize", "proportion", "timelimit", "stType", "imgName", "timeTS", "timeRel","runLength", "runTest", "touchTS", "runN", "runNH", "stPosX", "stPosY", "col", "row", "touchX", "touchY", "touchDist","targDist", "touchN", "error", "switches"]
         
         //write headers on the first trial if it's a new game
         if trialN == 0 && write_headers{
@@ -355,7 +358,7 @@ class GameScene: SKScene
         
         // save stimuli data
         contents = ""
-        headers = ["participantN","age","gender", "trialN", "condition", "FeatConj", "setSize", "proportion", "timelimit", "col", "row", "imgName", "stType", "posX", "posY"]
+        headers = ["participantN","age","gender", "trialN", "task", "condition", "FeatConj", "setSize", "proportion", "timelimit", "col", "row", "imgName", "stType", "posX", "posY"]
         
         if trialN == 0 && write_headers{
             contents += headers.joinWithSeparator(",")+"\n"
@@ -412,6 +415,7 @@ class GameScene: SKScene
         prevStim = nil
         prevTime = nil
         prevTouch = nil
+        switches = 2
         
         if let view = view
         {

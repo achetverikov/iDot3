@@ -18,11 +18,15 @@ var age = 0
 var gender = ""
 var FeatConj = 0
 var startcondition = 0
+var starttask = 0
+var settrial = 20
+var task = 0
 
 class MenuViewController: UIViewController {
 
     //connecting the buttons and textboxes and naming them
     @IBOutlet var newgamelabel: UIButton!
+    @IBOutlet var Triallabel: UILabel!
     @IBOutlet weak var agelabel: UITextField!
     @IBOutlet weak var genderlabel: UITextField!
     @IBOutlet weak var Participantlabel: UITextField!
@@ -33,12 +37,15 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var timelabel: UILabel!
     @IBOutlet weak var timestepper: UIStepper!
     @IBOutlet weak var conditionselect: UISegmentedControl!
+    @IBOutlet weak var TrialStepper: UIStepper!
+    @IBOutlet weak var taskselect: UISegmentedControl!
     
     //calling the settings screen to the screen
     override func viewDidLoad() {
         super.viewDidLoad()
         //Here we put values into the text boxes, first they are the default values but they should then become the values that we give them by tapping the steppers. The .value lines we are chaning the starting value of the steppers so that their value starts as we last set them (they do not reset to default values between rounds)
         sizelabel.text = String (setsize)
+        Triallabel.text = String (settrial)
         porplabel.text = String (proportion)
         timelabel.text = String (timer)
         Participantlabel.text = participant
@@ -48,6 +55,7 @@ class MenuViewController: UIViewController {
         porpstepper.value = Double (proportion)
         timestepper.value = Double (timer)
         conditionselect.selectedSegmentIndex = startcondition
+        taskselect.selectedSegmentIndex = starttask
         
     }
     
@@ -61,6 +69,7 @@ class MenuViewController: UIViewController {
         sizelabel.text = String(sizestepper.value)
         porplabel.text = String(porpstepper.value)
         timelabel.text = String(timestepper.value)
+        Triallabel.text = String(TrialStepper.value)
         
         Participantlabel.text = participant
         
@@ -81,6 +90,10 @@ class MenuViewController: UIViewController {
     @IBAction func saveage(sender: AnyObject) {
         age = Int (agelabel.text!)!
         new_game_starting = 1
+    }
+    @IBAction func savetrial(sender: AnyObject) {
+        settrial = Int (TrialStepper.value)
+        updateLabels()
     }
     @IBAction func savegender(sender: AnyObject) {
         gender = String (genderlabel.text!)
@@ -126,6 +139,23 @@ class MenuViewController: UIViewController {
         
     }
     //This changes the value of the global condition variable in addition to defining if it is a feature or conjunction search
+    @IBAction func savetask(sender: AnyObject) {
+    switch sender.selectedSegmentIndex {
+        case 0:
+            starttask = 0
+            task = 0
+        case 1:
+            starttask = 1
+            task = 1
+        case 2:
+            starttask = 2
+            task = 2
+        default:
+            break;
+        }
+        new_game_starting = 1
+        
+    }
     @IBAction func savecondition(sender: AnyObject) {
         switch sender.selectedSegmentIndex {
         case 0:
