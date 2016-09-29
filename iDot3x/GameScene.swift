@@ -53,6 +53,17 @@ var dist_threshold  = 22.0 // threshold for touch counting
 var write_headers=true // should we add headers to file? we do that on the first trial
 var new_game_starting = 0 // if new game is starting we reset stuff
 var switches = 2
+var repl_distractors = [String]() // for replacement of target with distractors
+var targets = [String]() // for target types
+var distractors = [String]() // for distractor types
+var cells = [Int]() // for positions
+var colWidth = 0.0
+var rowHeight = 0.0
+var xOffset = 0.0
+var yOffset = 0.0
+var randXFactor = 0.0
+var randYFactor = 0.0
+
 
 class GameScene: SKScene
 {
@@ -69,6 +80,7 @@ class GameScene: SKScene
     var runN = 1
     var runLength = 1
     var touchN = 0
+    
     
     
     //Here we define what is presented on the screen
@@ -104,17 +116,17 @@ class GameScene: SKScene
         trialLabel.fontSize = 22
         addChild(trialLabel)
         
-        //
-        let colWidth = Double(size.width)/Double(numCols+2)
-        let rowHeight = Double(size.height)/Double(numRows+2)
-        let xOffset = colWidth
-        let yOffset = rowHeight
+        // column width is computed as screen / numCols with one column offset to the left and to the right. same for column height
+        colWidth = Double(size.width)/Double(numCols+2)
+        rowHeight = Double(size.height)/Double(numRows+2)
+        xOffset = colWidth
+        yOffset = rowHeight
         
-        let randXFactor = ceil(colWidth*0.6)
-        let randYFactor = ceil(rowHeight*0.6)
+        randXFactor = ceil(colWidth*0.6)
+        randYFactor = ceil(rowHeight*0.6)
         
         // to randomize the positions, we randomize values within the range of zero to numRows*numCols-1 (number of cells within grid) and then shuffle them
-        var cells = [Int](0...(numRows*numCols-1))
+        cells = [Int](0...(numRows*numCols-1))
         cells.shuffleInPlace()
         
         //we add new arrays to beh and stimData so that we could use them to save the data
@@ -122,8 +134,7 @@ class GameScene: SKScene
         stimData.append([])
         
         // translating condition to stimuli types
-        var targets = [String]()
-        var distractors = [String]()
+
         switch condition {
         case "r/g":
             targets = ["redDot","greenDot"]
@@ -177,6 +188,13 @@ class GameScene: SKScene
             
             
         }
+        //for replacement task type we need as many distractors, as there are targets
+        var repl_distractors1 = [String](count: Int(Double(nStim)*propTarg/2.0), repeatedValue: String("distractor1"))
+        var repl_distractors2 = [String](count: Int(Double(nStim)*propTarg/2.0), repeatedValue: String("distractor2"))
+        
+        repl_distractors = repl_distractors1 + repl_distractors2
+        repl_distractors.shuffleInPlace()
+        
         //record trial start time
         trialStartTime = CACurrentMediaTime()
     }
@@ -288,9 +306,36 @@ class GameScene: SKScene
                     score += 1
                     timerforlabel = Double (currentTime2)
                     
-                    // remove the stimulus we clicked at
-                    self.removeChildrenInArray([node])
-                    
+                    if task == 0 || task == 2{
+                        // remove the stimulus we clicked at
+                        self.removeChildrenInArray([node])
+                        
+                        if task == 2 {
+                            var all_distractors = self.children.filter({
+                                $0.name=="stimulus" && ($0 as! Stimulus).stType.rangeOfString("distractor", options: .RegularExpressionSearch) != nil
+                            })
+                            let randomIndex = Int(arc4random_uniform(UInt32(all_distractors.count)))
+                            var node_to_remove = all_distractors[randomIndex]
+                            self.removeChildrenInArray([node_to_remove])
+
+                            
+                        }
+                    }
+                    else if task == 1 {
+                        
+                        // replace target with distractor
+                        stimulus.stType = repl_distractors[score-1]
+                        var imgName = distractors[0]
+                        if repl_distractors[score-1] == "distractor2"{
+                            imgName = distractors[1]
+                        }
+                        
+                        stimulus.imgName = imgName
+                        stimulus.texture =  SKTexture(imageNamed: imgName)
+                        
+                        
+                        
+                    }
                     // if there are no more targets, stop the game
                     if Double(score)==propTarg*Double(nStim){
                         gameOver(gameComplete: 1)
