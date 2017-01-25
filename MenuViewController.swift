@@ -87,59 +87,59 @@ class MenuViewController: UIViewController {
     }
 
   //here we change the values of the global variables as we push the steppers
-    @IBAction func saveage(sender: AnyObject) {
+    @IBAction func saveage(_ sender: AnyObject) {
         age = Int (agelabel.text!)!
         new_game_starting = 1
     }
-    @IBAction func savetrial(sender: AnyObject) {
+    @IBAction func savetrial(_ sender: AnyObject) {
         settrial = Int (TrialStepper.value)
         updateLabels()
     }
-    @IBAction func savegender(sender: AnyObject) {
+    @IBAction func savegender(_ sender: AnyObject) {
         gender = String (genderlabel.text!)
         new_game_starting = 1
     }
-    @IBAction func changedsize(sender: AnyObject) {
+    @IBAction func changedsize(_ sender: AnyObject) {
         updateLabels()
     }
-    @IBAction func changedporp(sender: AnyObject) {
+    @IBAction func changedporp(_ sender: AnyObject) {
         updateLabels()
     }
-    @IBAction func changedtime(sender: AnyObject) {
+    @IBAction func changedtime(_ sender: AnyObject) {
         updateLabels()
         new_game_starting = 1
     }
-    @IBAction func savesettings(sender: AnyObject) {
+    @IBAction func savesettings(_ sender: AnyObject) {
         setsize = Int (sizestepper.value)
         new_game_starting = 1
     }
-    @IBAction func saveprop(sender: AnyObject) {
+    @IBAction func saveprop(_ sender: AnyObject) {
         proportion = Int (porpstepper.value)
         new_game_starting = 1
     }
-    @IBAction func savetimer(sender: AnyObject) {
+    @IBAction func savetimer(_ sender: AnyObject) {
         timer = Double (timestepper.value)
         new_game_starting = 1
     }
-    @IBAction func saveparticipant(sender: AnyObject) {
+    @IBAction func saveparticipant(_ sender: AnyObject) {
         participant = String (Participantlabel.text!)
         new_game_starting = 1
     }
     //here we let the new game button clear all variables for a new participant
-    @IBAction func cleardata(sender: AnyObject) {
+    @IBAction func cleardata(_ sender: AnyObject) {
         clearbetween()
         participant = ""
         age = 0
         gender = ""
         updateLabels()
-        currentDate = NSDate()
+        currentDate = Date()
         dateFormatter.dateFormat = "yyyy_MM_dd_HH_mm_ss"
-        date_identifier = dateFormatter.stringFromDate(currentDate)
+        date_identifier = dateFormatter.string(from: currentDate)
         write_headers = true
         
     }
     //This changes the value of the global condition variable in addition to defining if it is a feature or conjunction search
-    @IBAction func savetask(sender: AnyObject) {
+    @IBAction func savetask(_ sender: AnyObject) {
     switch sender.selectedSegmentIndex {
         case 0:
             starttask = 0
@@ -150,13 +150,16 @@ class MenuViewController: UIViewController {
         case 2:
             starttask = 2
             task = 2
+        case 3:
+            starttask = 3
+            task = 3
         default:
             break;
         }
         new_game_starting = 1
         
     }
-    @IBAction func savecondition(sender: AnyObject) {
+    @IBAction func savecondition(_ sender: AnyObject) {
         switch sender.selectedSegmentIndex {
         case 0:
             condition = "r/g"
@@ -174,6 +177,38 @@ class MenuViewController: UIViewController {
             condition = "rd/gs"
             FeatConj = 1
             startcondition = 3
+        case 4:
+            condition = "Pv6"
+            FeatConj = 0
+            startcondition = 4
+        case 5:
+            condition = "O/Bv5"
+            FeatConj = 0
+            startcondition = 5
+        case 6:
+            condition = "Y/W/Gv4"
+            FeatConj = 0
+            startcondition = 6
+        case 7:
+            condition = "R/B/G/Yv3"
+            FeatConj = 0
+            startcondition = 7
+        case 8:
+            condition = "Rv2"
+            FeatConj = 0
+            startcondition = 8
+        case 9:
+            condition = "G/Bv2"
+            FeatConj = 0
+            startcondition = 9
+        case 10:
+            condition = "Y/P/Ov2"
+            FeatConj = 0
+            startcondition = 10
+        case 11:
+            condition = "W/R/G/Bv2"
+            FeatConj = 0
+            startcondition = 11
         default:
             break;
         }

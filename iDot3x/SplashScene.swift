@@ -19,44 +19,69 @@ class SplashScene: SKScene
     var label = SKLabelNode(text: "Tap to Play")
     var label2 = SKLabelNode (text: "")
     var label3 = SKLabelNode (text: "")
-    var label4 = SKLabelNode (text: "Score")
-    var label5 = SKLabelNode (text: "Time")
+    var label4 = SKLabelNode (text: "Stig")
+    var label8 = SKLabelNode (text: "Hæstu stig")
+    var label5 = SKLabelNode (text: "Tími")
+    var label6 = SKLabelNode (text: "Umferð")
+    var label7 = SKLabelNode (text: "")
+    var label9 = SKLabelNode (text: "")
     var win = SKSpriteNode (imageNamed:"HappyFace")
     var lose = SKSpriteNode (imageNamed:"SadFace")
     
     //calling the splash screen
-    override func didMoveToView(view: SKView)
+    override func didMove(to view: SKView)
     {
         //color of the background
-        backgroundColor = SKColor.whiteColor()
+        backgroundColor = SKColor.white
         //location of the images
-        win.position = CGPointMake(size.width*0.5, size.height*0.8)
-        lose.position = CGPointMake(size.width*0.5, size.height*0.8)
+        win.position = CGPoint(x: size.width*0.5, y: size.height*0.8)
+        lose.position = CGPoint(x: size.width*0.5, y: size.height*0.8)
         //location, color, size and presenting each text box
-        label.position = CGPointMake(size.width*0.5, size.height*0.5)
-        label.fontColor = UIColor.blackColor()
+        label.position = CGPoint(x: size.width*0.5, y: size.height*0.51)
+        label.fontColor = UIColor.black
         label.fontSize = 42
         addChild(label)
         
-        label2.position = CGPointMake(size.width*0.5, size.height*0.4)
-        label2.fontColor = UIColor.blackColor()
+        label2.position = CGPoint(x: size.width*0.5, y: size.height*0.43)
+        label2.fontColor = UIColor.black
         label2.fontSize = 42
         addChild(label2)
         
-        label3.position = CGPointMake(size.width*0.5, size.height*0.3)
-        label3.fontColor = UIColor.blackColor()
+        label3.position = CGPoint(x: size.width*0.5, y: size.height*0.27)
+        label3.fontColor = UIColor.black
         label3.fontSize = 42
         addChild(label3)
         
-        label4.position = CGPointMake(size.width*0.4, size.height*0.4)
-        label4.fontColor = UIColor.blueColor()
+        label4.position = CGPoint(x: size.width*0.4, y: size.height*0.43)
+        label4.fontColor = UIColor.blue
         label4.fontSize = 42
         addChild(label4)
         
-        label5.position = CGPointMake(size.width*0.4, size.height*0.3)
-        label5.fontColor = UIColor.blueColor()
+        label8.position = CGPoint(x: size.width*0.345, y: size.height*0.35)
+        label8.fontColor = UIColor.blue
+        label8.fontSize = 42
+        addChild(label8)
+        
+        label5.position = CGPoint(x: size.width*0.4, y: size.height*0.27)
+        label5.fontColor = UIColor.blue
         label5.fontSize = 42
         addChild(label5)
+        
+        label6.position = CGPoint(x: size.width*0.377, y: size.height*0.19)
+        label6.fontColor = UIColor.blue
+        label6.fontSize = 42
+        addChild(label6)
+        
+        label7.position = CGPoint(x: size.width*0.5, y: size.height*0.19)
+        label7.fontColor = UIColor.black
+        label7.fontSize = 42
+        addChild(label7)
+        
+        label9.position = CGPoint(x: size.width*0.5, y: size.height*0.35)
+        label9.fontColor = UIColor.black
+        label9.fontSize = 42
+        addChild(label9)
+        
         //Here we record the current time when the splash screen appears into the variable we created at the top
         splashStartTime = CACurrentMediaTime()
     }
@@ -64,38 +89,48 @@ class SplashScene: SKScene
     var gameWon : Int = 0 {
         didSet {
             if gameWon==0{
-                label.text = "Game Over!"
+                label.text = "Umferð lokið!"
                 label2.text = String (score)
                 label3.text = NSString (format: "%.1f", currentTime2) as String
+                label7.text = String (String(trialCompleted) + "/" + String(settrial))
+                label9.text = String (highscore) 
                 addChild(lose)
                 score = 0
+                currentTime2 = 0
+                changescene = 0
             }
             else if gameWon==1{
                 label.text = "Game Won!"
                 label2.text = String(score)
                 label3.text = NSString (format: "%.1f", timerforlabel) as String
+                label7.text = String (String(trialCompleted) + "/" + String(settrial))
+                label9.text = String (highscore) 
                 addChild(win)
                 score = 0
                 trialCompleted += 1
+                changescene = 0
             }
             else if gameWon==2{
-                label.text = "Game Completed!"
+                label.text = "Umferð lokið!"
                 label2.text = String(score)
                 label3.text = NSString (format: "%.1f", timerforlabel) as String
+                label7.text = String (String(trialCompleted) + "/" + String(settrial))
+                label9.text = String (highscore)
                 addChild(win)
                 score = 0
                 trialCompleted += 1
+                changescene = 0 
             }
                }
     }
     //Restarting the game/start the next trial by clicking the screen
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: UITouch in touches {
             print(touch.timestamp)
             
         if let view = view
         {
-        if trialCompleted < settrial {
+        if trialCompleted <= settrial {
             //delay on the screen tapping, so that you cannot tap the screen for one second after the splash screen appears, this is to reduce the likelyhood of accidentally starting a new trial
             if CACurrentMediaTime() >= splashStartTime + 1 {
               

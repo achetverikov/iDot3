@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="YXB-xu-8Gg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="YXB-xu-8Gg">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--MenuViewController-->
@@ -58,7 +58,7 @@
                                     <action selector="saveprop:" destination="YXB-xu-8Gg" eventType="valueChanged" id="a3h-Rz-gAl"/>
                                 </connections>
                             </stepper>
-                            <stepper opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="60" stepValue="5" id="4Vp-xg-F7g">
+                            <stepper opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="180" stepValue="5" id="4Vp-xg-F7g">
                                 <rect key="frame" x="465" y="343" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -67,13 +67,21 @@
                                 </connections>
                             </stepper>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="ToQ-1X-HO0">
-                                <rect key="frame" x="378" y="462" width="269" height="29"/>
+                                <rect key="frame" x="174" y="462" width="850" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="R/G"/>
                                     <segment title="B/Y"/>
                                     <segment title="RS/GD"/>
                                     <segment title="RD/GS"/>
+                                    <segment title="Pv6"/>
+                                    <segment title="O/Bv5"/>
+                                    <segment title="Y/W/Gv4"/>
+                                    <segment title="R/B/G/Yv3"/>
+                                    <segment title="Rv2"/>
+                                    <segment title="G/Bv2"/>
+                                    <segment title="Y/P/Ov2"/>
+                                    <segment title="W/R/G/Bv2"/>
                                 </segments>
                                 <connections>
                                     <action selector="savecondition:" destination="YXB-xu-8Gg" eventType="valueChanged" id="vcj-oq-Ebr"/>
@@ -173,20 +181,14 @@
                                 <color key="textColor" red="0.54307508469999999" green="0.32395470139999999" blue="0.98856085540000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target stimuli" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdy-2h-b88">
-                                <rect key="frame" x="209" y="460" width="161" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
-                                <color key="textColor" red="0.54307508469999999" green="0.32395470139999999" blue="0.98856085540000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="9u1-6X-H1F">
-                                <rect key="frame" x="378" y="515" width="206" height="29"/>
+                                <rect key="frame" x="378" y="515" width="269" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Classic"/>
                                     <segment title="Replace"/>
                                     <segment title="Disappear"/>
+                                    <segment title="Raspberry"/>
                                 </segments>
                                 <connections>
                                     <action selector="savetask:" destination="YXB-xu-8Gg" eventType="valueChanged" id="YlB-W5-NAy"/>
@@ -201,6 +203,13 @@
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lij-Op-BQP">
                                 <rect key="frame" x="258" y="513" width="112" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
+                                <color key="textColor" red="0.54307508469999999" green="0.32395470139999999" blue="0.98856085540000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target stimuli" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdy-2h-b88">
+                                <rect key="frame" x="13" y="460" width="161" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
                                 <color key="textColor" red="0.54307508469999999" green="0.32395470139999999" blue="0.98856085540000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -249,6 +258,15 @@
                                     <action selector="done:" destination="BV1-FR-VrT" eventType="touchUpInside" id="P7y-PM-3cT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XNn-CO-FXU">
+                                <rect key="frame" x="991" y="363" width="27" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Button" image="r_arrow"/>
+                                <connections>
+                                    <action selector="newscene:" destination="BV1-FR-VrT" eventType="touchUpInside" id="j4t-Dj-XtM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -259,14 +277,16 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="settingsButton" destination="Ls3-ib-zZH" id="3nB-Nc-gpW"/>
+                        <outlet property="switchscene" destination="XNn-CO-FXU" id="e0j-t6-7Hn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="426" y="803"/>
+            <point key="canvasLocation" x="512" y="803"/>
         </scene>
     </scenes>
     <resources>
         <image name="play" width="512" height="512"/>
+        <image name="r_arrow" width="396" height="607"/>
     </resources>
 </document>

@@ -31,12 +31,12 @@ class Stimulus: SKSpriteNode {
         self.imgName = imgName
         
         //Here we put in the size of the stimulus and pass everything to SKSpriteNode class initializer
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(30, 30))
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 30, height: 30))
         
 //        print("pos: \(CGFloat(posX), \(CGFloat(posY))")
         
-        self.position = CGPointMake(posX, posY)
-        self.anchorPoint = CGPointMake(0.5, 0.5)
+        self.position = CGPoint(x: posX, y: posY)
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
     }
 
