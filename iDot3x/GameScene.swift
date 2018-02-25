@@ -145,53 +145,53 @@ class GameScene: SKScene
 
         switch condition {
         case "r/g":
-            targets = ["redDot","greenDot"]
-            distractors = ["blueDot", "yellowDot"]
-            neutral = ["redDot","greenDot"]
+            targets = ["redDot100S","greenDot100S"]
+            distractors = ["blueDot100S", "yellowDot100S"]
+            neutral = ["redDot100S","greenDot100S"]
         case "b/y":
-            distractors = ["redDot","greenDot"]
-            targets = ["blueDot", "yellowDot"]
-            neutral = ["blueDot", "yellowDot"]
+            distractors = ["redDot100S","greenDot100S"]
+            targets = ["blueDot100S", "yellowDot100S"]
+            neutral = ["blueDot100S", "yellowDot100S"]
         case "rs/gd":
-            distractors = ["redDot","greenSquare"]
-            targets = ["redSquare", "greenDot"]
-            neutral = ["redSquare", "greenDot"]
+            distractors = ["redDot100S","greenSquare100S"]
+            targets = ["redSquare100S", "greenDot100S"]
+            neutral = ["redSquare100S", "greenDot100S"]
         case "rd/gs":
-            targets = ["redDot","greenSquare"]
-            distractors = ["redSquare", "greenDot"]
-            neutral = ["redDot","greenSquare"]
-        case "Pv6":
-            targets = ["pinkDot"]
-            distractors = ["blueDot", "yellowDot", "whiteDot", "orangeDot", "redDot", "greenDot"]
-            neutral = ["pinkDot"]
-        case "O/Bv5":
-            targets = ["orangeDot", "blueDot"]
-            distractors = ["pinkDot", "yellowDot", "whiteDot", "redDot", "greenDot"]
-            neutral = ["orangeDot", "blueDot"]
-        case "Y/W/Gv4":
-            targets = ["yellowDot", "whiteDot", "greenDot"]
-            distractors = ["pinkDot", "blueDot", "orangeDot", "redDot"]
-            neutral = ["yellowDot", "whiteDot", "greenDot"]
-        case "R/B/G/Yv3":
-            targets = ["redDot", "blueDot", "greenDot", "yellowDot"]
-            distractors = ["pinkDot", "whiteDot", "orangeDot"]
-            neutral = ["redDot", "blueDot", "greenDot", "yellowDot"]
-        case "Rv2":
-            targets = ["redDot"]
-            distractors = ["greenDot", "blueDot"]
-            neutral = ["redDot"]
-        case "G/Bv2":
-            targets = ["greenDot", "blueDot"]
-            distractors = ["yellowDot", "whiteDot"]
-            neutral = ["greenDot", "blueDot"]
-        case "Y/P/Ov2":
-            targets = ["yellowDot", "pinkDot", "orangeDot"]
-            distractors = ["redDot", "greenDot"]
-            neutral = ["yellowDot", "pinkDot", "orangeDot"]
-        case "W/R/G/Bv2":
-            targets = ["whiteDot", "redDot", "greenDot", "blueDot"]
-            distractors = ["yellowDot", "pinkDot"]
-            neutral = ["whiteDot", "redDot", "greenDot", "blueDot"]
+            targets = ["redDot100S","greenSquare100S"]
+            distractors = ["redSquare100S", "greenDot100S"]
+            neutral = ["redDot100S","greenSquare100S"]
+        case "R/G-n":
+            targets = ["redDot100S", "redDot90S", "redDot80S", "redDot70S", "redDot60S", "greenDot100S", "greenDot90S", "greenDot80S", "greenDot70S", "greenDot60S"]
+            distractors = ["blueDot100S", "yellowDot100S"]
+            neutral = ["redDot100S", "redDot90S", "redDot80S", "redDot70S", "redDot60S", "greenDot100S", "greenDot90S", "greenDot80S", "greenDot70S", "greenDot60S"]
+        case "R/G-w":
+            targets = ["redDot100S", "redDot80S", "redDot60S", "redDot40S", "redDot20S", "greenDot100S", "greenDot80S", "greenDot60S", "greenDot40S", "greenDot20S"]
+            distractors = ["blueDot100S", "yellowDot100S"]
+            neutral = ["redDot100S", "redDot80S", "redDot60S", "redDot40S", "redDot20S", "greenDot100S", "greenDot80S", "greenDot60S", "greenDot40S", "greenDot20S"]
+        case "B/Y-n":
+            targets = ["blueDot100S", "blueDot90S", "blueDot80S", "blueDot70S", "blueDot60S", "yellowDot100S", "yellowDot90S", "yellowDot80S", "yellowDot70S", "yellowDot60S"]
+            distractors = ["redDot100S", "greenDot100S"]
+            neutral = ["blueDot100S", "blueDot90S", "blueDot80S", "blueDot70S", "blueDot60S", "yellowDot100S", "yellowDot90S", "yellowDot80S", "yellowDot70S", "yellowDot60S"]
+        case "B/Y-w":
+            targets = ["blueDot100S", "blueDot80S", "blueDot60S", "blueDot40S", "blueDot20S", "yellowDot100S", "yellowDot80S", "yellowDot60S", "yellowDot40S", "yellowDot20S"]
+            distractors = ["redDot100S", "greenDot100S"]
+            neutral = ["blueDot100S", "blueDot80S", "blueDot60S", "blueDot40S", "blueDot20S", "yellowDot100S", "yellowDot80S", "yellowDot60S", "yellowDot40S", "yellowDot20S"]
+        case "RS/GD-n":
+            targets = ["redSquare100S", "redSquare90S", "redSquare80S", "redSquare70S", "redSquare60S", "greenDot100S", "greenDot90S", "greenDot80S", "greenDot70S", "greenDot60S"]
+            distractors = ["redDot100S", "greenSquare100S"]
+            neutral = ["redSquare100S", "redSquare90S", "redSquare80S", "redSquare70S", "redSquare60S", "greenDot100S", "greenDot90S", "greenDot80S", "greenDot70S", "greenDot60S"]
+        case "RS/GD-w":
+            targets = ["redSquare100S", "redSquare80S", "redSquare60S", "redSquare40S", "redSquare20S", "greenDot100S", "greenDot80S", "greenDot60S", "greenDot40S", "greenDot20S"]
+            distractors = ["redDot100S", "greenSquare100S"]
+            neutral = ["redSquare100S", "redSquare80S", "redSquare60S", "redSquare40S", "redSquare20S", "greenDot100S", "greenDot80S", "greenDot60S", "greenDot40S", "greenDot20S"]
+        case "BS/YD-n":
+            targets = ["blueSquare100S", "blueSquare90S", "blueSquare80S", "blueSquare70S", "blueSquare60S", "yellowDot100S", "yellowDot90S", "yellowDot80S", "yellowDot70S", "yellowDot60S"]
+            distractors = ["blueDot100S", "yellowSquare100S"]
+            neutral = ["blueSquare100S", "blueSquare90S", "blueSquare80S", "blueSquare70S", "blueSquare60S", "yellowDot100S", "yellowDot90S", "yellowDot80S", "yellowDot70S", "yellowDot60S"]
+        case "BS/YD-w":
+            targets = ["blueSquare100S", "blueSquare80S", "blueSquare60S", "blueSquare40S", "blueSquare20S", "yellowDot100S", "yellowDot80S", "yellowDot60S", "yellowDot40S", "yellowDot20S"]
+            distractors = ["blueDot100S", "yellowSquare100S"]
+            neutral = ["blueSquare100S", "blueSquare80S", "blueSquare60S", "blueSquare40S", "blueSquare20S", "yellowDot100S", "yellowDot80S", "yellowDot60S", "yellowDot40S", "yellowDot20S"]
         default:
             break
         }
@@ -224,194 +224,81 @@ class GameScene: SKScene
                 stType = "target2"
              }
               }
-            else if startcondition == 4 {
-                if Double(i) >= 40 && Double(i) <= 46{
-                    imgName = distractors[0]
-                    stType = "distractor1"
-                     }
-                    //half of the distractors have another type
-                    if Double(i) >= 47 && Double(i) <= 53 {
-                        imgName = distractors[1]
-                        stType = "distractor2"
+            else if startcondition == 4 || startcondition == 5 || startcondition == 6 || startcondition == 7 || startcondition == 8 || startcondition == 9 || startcondition == 10 || startcondition == 11 {
+                    if Double(i) >= 4 && Double(i) <= 7 {
+                        imgName = targets[1]
+                        stType = "target2"
                     }
-                    if Double(i) >= 54 && Double(i) <= 60 {
-                        imgName = distractors[2]
-                        stType = "distractor3"
-                    }
-                    if Double(i) >= 61 && Double(i) <= 67 {
-                        imgName = distractors[3]
-                        stType = "distractor4"
-                    }
-                    if Double(i) >= 68 && Double(i) <= 74{
-                        imgName = distractors[4]
-                        stType = "distractor5"
-                    }
-                    if Double(i) >= 75 && Double(i) <= 81 {
-                        imgName = distractors[5]
-                        stType = "distractor6"
-                    }
-                }
-            else if startcondition == 5 {
-                if Double(i) >= 1 && Double(i) <= 19 {
-                    imgName = targets[0]
-                    stType = "target1"
-                }
-                if Double(i) >= 20 && Double(i) <= 39 {
-                    imgName = targets[1]
-                    stType = "target2"
-                    }
-                    //half of the distractors have another type
-                    if Double(i) >= 40 && Double(i) <= 47 {
-                        imgName = distractors[0]
-                        stType = "distractor1"
-                    }
-                    if Double(i) >= 48 && Double(i) <= 55 {
-                        imgName = distractors[1]
-                        stType = "distractor2"
-                    }
-                    if Double(i) >= 56 && Double(i) <= 63 {
-                        imgName = distractors[2]
-                        stType = "distractor3"
-                    }
-                    if Double(i) >= 64 && Double(i) <= 71{
-                        imgName = distractors[3]
-                        stType = "distractor4"
-                    }
-                    if Double(i) >= 72 && Double(i) <= 80 {
-                        imgName = distractors[4]
-                        stType = "distractor5"
-                    }
-                    
-                }
-        
-            else if startcondition == 6 {
-                if Double(i) >= 14 && Double(i) <= 26{
-                    imgName = targets[1]
-                    stType = "target2"
-                    }
-                    //half of the distractors have another type
-                    if Double(i) >= 27 && Double(i) <= 39 {
+                    if Double(i) >= 8 && Double(i) <= 11 {
                         imgName = targets[2]
                         stType = "target3"
                     }
-                    if Double(i) >= 40 && Double(i) <= 49 {
+                    if Double(i) >= 12 && Double(i) <= 15 {
+                        imgName = targets[3]
+                        stType = "target4"
+                    }
+                    if Double(i) >= 16 && Double(i) <= 19 {
+                        imgName = targets[4]
+                        stType = "target5"
+                    }
+                    if Double(i) >= 20 && Double(i) <= 23 {
+                        imgName = targets[5]
+                        stType = "target6"
+                    }
+                    if Double(i) >= 24 && Double(i) <= 27 {
+                        imgName = targets[6]
+                        stType = "target7"
+                    }
+                    if Double(i) >= 28 && Double(i) <= 31 {
+                        imgName = targets[7]
+                        stType = "target8"
+                    }
+                    if Double(i) >= 32 && Double(i) <= 35 {
+                        imgName = targets[8]
+                        stType = "target9"
+                    }
+                    if Double(i) >= 36 && Double(i) <= 39 {
+                        imgName = targets[9]
+                        stType = "target10"
+                    }
+                    if Double(i) >= 40 && Double(i) <= 59 {
                         imgName = distractors[0]
                         stType = "distractor1"
                     }
-                    if Double(i) >= 50 && Double(i) <= 59 {
+                    if Double(i) >= 60 && Double(i) <= 79 {
                         imgName = distractors[1]
                         stType = "distractor2"
-                    }
-                    if Double(i) >= 60 && Double(i) <= 69{
-                        imgName = distractors[2]
-                        stType = "distractor3"
-                    }
-                    if Double(i) >= 70 && Double(i) <= 80 {
-                        imgName = distractors[3]
-                        stType = "distractor4"
                     }
             }
-            else if startcondition == 7 {
-                if Double(i) >= 10 && Double(i) <= 19{
-                    imgName = targets[1]
-                    stType = "target2"
-                     }
-                    //half of the distractors have another type
-                    if Double(i) >= 20 && Double(i) <= 29 {
-                        imgName = targets[2]
-                        stType = "target3"
-                    }
-                    if Double(i) >= 30 && Double(i) <= 39 {
-                        imgName = targets[3]
-                        stType = "target4"
-                    }
-                    if Double(i) >= 40 && Double(i) <= 53 {
-                        imgName = distractors[0]
-                        stType = "distractor1"
-                    }
-                    if Double(i) >= 54 && Double(i) <= 66{
-                        imgName = distractors[1]
-                        stType = "distractor2"
-                    }
-                    if Double(i) >= 67 && Double(i) <= 80 {
-                        imgName = distractors[2]
-                        stType = "distractor3"
-                    }
-                    
-                }
+            // else if startcondition == 7 {
+            //    if Double(i) >= 10 && Double(i) <= 19{
+            //        imgName = targets[1]
+            //        stType = "target2"
+            //         }
+            //        //half of the distractors have another type
+            //       if Double(i) >= 20 && Double(i) <= 29 {
+            //            imgName = targets[2]
+            //            stType = "target3"
+            //        }
+            //        if Double(i) >= 30 && Double(i) <= 39 {
+            //            imgName = targets[3]
+            //            stType = "target4"
+            //        }
+            //        if Double(i) >= 40 && Double(i) <= 53 {
+            //            imgName = distractors[0]
+            //            stType = "distractor1"
+            //        }
+            //        if Double(i) >= 54 && Double(i) <= 66{
+            //            imgName = distractors[1]
+            //            stType = "distractor2"
+            //        }
+            //        if Double(i) >= 67 && Double(i) <= 80 {
+            //            imgName = distractors[2]
+            //            stType = "distractor3"
+            //        }
+            //    }
            
-            else if startcondition == 8 {
-                if Double(i) >= 40 && Double(i) <= 59{
-                    imgName = distractors[0]
-                    stType = "distractor1"
-                     }
-                    //half of the distractors have another type
-                    if Double(i) >= 60 && Double(i) <= 80 {
-                        imgName = distractors[1]
-                        stType = "distractor2"
-                    }
-                }
-           
-            else if startcondition == 9 {
-                if Double(i) >= 20 && Double(i) <= 39{
-                    imgName = targets[1]
-                    stType = "target2"
-                    }
-                    //half of the distractors have another type
-                    if Double(i) >= 40 && Double(i) <= 59 {
-                        imgName = distractors[0]
-                        stType = "distractor1"
-                    }
-                    if Double(i) >= 60 && Double(i) <= 80 {
-                        imgName = distractors[1]
-                        stType = "distractor2"
-                    }
-                }
-            
-            else if startcondition == 10 {
-                if Double(i) >= 14 && Double(i) <= 26{
-                    imgName = targets[1]
-                    stType = "target2"
-                    }
-                    //half of the distractors have another type
-                    if Double(i) >= 27 && Double(i) <= 39 {
-                        imgName = targets[2]
-                        stType = "target3"
-                    }
-                    if Double(i) >= 40 && Double(i) <= 59 {
-                        imgName = distractors[0]
-                        stType = "distractor1"
-                    }
-                    if Double(i) >= 60 && Double(i) <= 80 {
-                        imgName = distractors[1]
-                        stType = "distractor2"
-                    }
-                }
-            
-            else if startcondition == 11 {
-                if Double(i) >= 10 && Double(i) <= 19{
-                    imgName = targets[1]
-                    stType = "target2"
-                    }
-                    //half of the distractors have another type
-                    if Double(i) >= 20 && Double(i) <= 29 {
-                        imgName = targets[2]
-                        stType = "target3"
-                    }
-                    if Double(i) >= 30 && Double(i) <= 39 {
-                        imgName = targets[3]
-                        stType = "target4"
-                    }
-                    if Double(i) >= 40 && Double(i) <= 59 {
-                        imgName = distractors[0]
-                        stType = "distractor1"
-                    }
-                    if Double(i) >= 60 && Double(i) <= 80 {
-                        imgName = distractors[1]
-                        stType = "distractor2"
-                    }
-                }
-            
+
             
             //actually creating the stimulus and adding it to the scene
             let object = Stimulus(col: col, row: row, imgName: imgName, stType: stType, xOffset: xOffset, yOffset: yOffset, colWidth: colWidth, rowHeight: rowHeight, randXFactor: randXFactor, randYFactor: randYFactor)
@@ -625,7 +512,7 @@ class GameScene: SKScene
             }
             else {
                 // behData saved even when the touch is not on a stimuli
-                behData[trialN].append(["participantN": participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "task":"\(task)","condition":condition, "FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":"", "imgName":"", "timeTS": "\(ts_cac)", "timeRel":"\(timeRel)", "runLength":"", "runTest":"\(runTest)", "touchTS":"\(touchTS)", "runN":"", "runNH": "0", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist":"", "touchN":"\(touchN)", "error":"0", "switches":"\(switches)", "changeScreen":"\(changescene)"])
+               // behData[trialN].append(["participantN": participant, "age":"\(age)", "gender":"\(gender)", "trialN":"\(trialN)", "task":"\(task)","condition":condition, "FeatConj":"\(FeatConj)", "setSize":"\(setsize)", "proportion":"\(proportion)", "timelimit":"\(timer)", "stType":"", "imgName":"", "timeTS": "\(ts_cac)", "timeRel":"\(timeRel)", "runLength":"", "runTest":"\(runTest)", "touchTS":"\(touchTS)", "runN":"", "runNH": "0", "stPosX":"", "stPosY":"", "col":"", "row":"", "touchX":"\(location.x)", "touchY":"\(location.y)", "touchDist":"\(touchDist)", "targDist":"", "touchN":"\(touchN)", "error":"0", "switches":"\(switches)", "changeScreen":"\(changescene)"])
                 
                 prevTouch = touch
                 prevTime = ts_cac

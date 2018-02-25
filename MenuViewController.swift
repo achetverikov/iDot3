@@ -178,36 +178,36 @@ class MenuViewController: UIViewController {
             FeatConj = 1
             startcondition = 3
         case 4:
-            condition = "Pv6"
+            condition = "R/G-n"
             FeatConj = 0
             startcondition = 4
         case 5:
-            condition = "O/Bv5"
+            condition = "R/G-w"
             FeatConj = 0
             startcondition = 5
         case 6:
-            condition = "Y/W/Gv4"
+            condition = "B/Y-n"
             FeatConj = 0
             startcondition = 6
         case 7:
-            condition = "R/B/G/Yv3"
+            condition = "B/Y-w"
             FeatConj = 0
             startcondition = 7
         case 8:
-            condition = "Rv2"
-            FeatConj = 0
+            condition = "RS/GD-n"
+            FeatConj = 1
             startcondition = 8
         case 9:
-            condition = "G/Bv2"
-            FeatConj = 0
+            condition = "RS/GD-w"
+            FeatConj = 1
             startcondition = 9
         case 10:
-            condition = "Y/P/Ov2"
-            FeatConj = 0
+            condition = "BS/YD-n"
+            FeatConj = 1
             startcondition = 10
         case 11:
-            condition = "W/R/G/Bv2"
-            FeatConj = 0
+            condition = "BS/YD-w"
+            FeatConj = 1
             startcondition = 11
         default:
             break;

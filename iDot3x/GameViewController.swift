@@ -33,7 +33,7 @@ class GameViewController: UIViewController
     @IBAction func newscene(_ sender: AnyObject) {
         if trialCompleted <= settrial {
         changescene = changescene + 1
-        viewDidLoad()
+        //viewDidLoad()
             }
     }
     // When setting button is clicked, dismiss the view controller (the scene will be dismissed as well)
